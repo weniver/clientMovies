@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import server from "../apis/server.js";
 import MovieListItem from "../components/MovieListItem.js";
+import SearchIMDB from "../components/SearchIMDB.js";
 
 const MoviesScreen = () => {
   const renderMovies = () => {
-    return data.map((movie) => <MovieListItem key={movie.id}/>);
+    return data.map((movie) => <MovieListItem key={movie.id} />);
   };
 
   const [data, setData] = useState([]);
@@ -13,7 +14,7 @@ const MoviesScreen = () => {
     const fetchData = async () => {
       try {
         const response = await server.get(`/movies`);
-        setData(response.data)
+        setData(response.data);
       } catch (e) {
         console.log(e);
       }
@@ -23,6 +24,7 @@ const MoviesScreen = () => {
 
   return (
     <div className="container">
+      <SearchIMDB />
       <h1>MoviesScreen</h1>
       {renderMovies()}
     </div>
