@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const AddMovieScreen = () => {
   return (
     <div className="container">
-      <h1>AddMovieScreen</h1>
+      <h1>AddMovieScreen Small Change</h1>
     </div>
   );
 };
