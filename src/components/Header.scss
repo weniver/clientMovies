@@ -1,0 +1,17 @@
+.header-container {
+  background-color: #152238;
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.header-link{
+  color: white;
+  margin: 0 1rem;
+  &:hover{
+    text-decoration: none;
+    color: lemonchiffon;
+  }
+}
