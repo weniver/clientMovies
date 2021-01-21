@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker
+} from "@material-ui/pickers";
+
+import DateFnsUtils from "@date-io/date-fns";
 
 const AddMovieScreen = () => {
   const formik = useFormik({
@@ -10,7 +16,7 @@ const AddMovieScreen = () => {
       director: "",
       country: "",
       rating: "",
-      watchedOn: "",
+      watchedOn: new Date(),
       poster: "",
     },
     validationSchema: yup.object({
@@ -116,23 +122,21 @@ const AddMovieScreen = () => {
           </div>
         </div>
         <div className="mb-3 col-4">
-          <label className="form-label" htmlFor="watchedOn">
-            Watched On
-          </label>
-          <input
-            className="form-control"
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
             id="watchedOn"
-            name="watchedOn"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            autoOk
+            disableFuture
+            disableToolbar
+            label="Watched On"
+            format="dd/MM/yyyy"
             value={formik.values.watchedOn}
+            onChange={value => formik.setFieldValue("watchedOn", value)}
+            KeyboardButtonProps={{
+              "aria-label": "change date"
+            }}
           />
-          <div className="form-text">
-            {formik.touched.watchedOn && formik.errors.watchedOn
-              ? formik.errors.watchedOn
-              : null}
-          </div>
+        </MuiPickersUtilsProvider>
         </div>
         <div className="col-3 my-auto">
           <button type="submit" className="btn btn-primary">
