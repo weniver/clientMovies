@@ -1,7 +1,15 @@
 import React from "react";
 import "./MovieListItem.scss";
 
-const MovieListItem = () => {
+const MovieListItem = ({
+  title,
+  rating,
+  year,
+  country,
+  director,
+  watchedOn,
+  Poster,
+}) => {
   return (
     <div className="movie-container row">
       <div className="col-10">
