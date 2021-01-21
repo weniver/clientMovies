@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import {
   MuiPickersUtilsProvider,
-  KeyboardDatePicker
+  KeyboardDatePicker,
 } from "@material-ui/pickers";
 
 import DateFnsUtils from "@date-io/date-fns";
@@ -45,7 +45,7 @@ const AddMovieScreen = () => {
     <div className="col-8 mx-auto">
       <h1 className="my-3">Add a movie:</h1>
       <form className="row" onSubmit={formik.handleSubmit}>
-        <div className="mb-3 col-12">
+        <div className="mb-3 col-6">
           <label className="form-label" htmlFor="title">
             Title
           </label>
@@ -61,7 +61,7 @@ const AddMovieScreen = () => {
           <div className="form-text">
             {formik.touched.title && formik.errors.title
               ? formik.errors.title
-              : null}
+              : <>&nbsp;</>}
           </div>
         </div>
         <div className="mb-3 col-6">
@@ -80,7 +80,7 @@ const AddMovieScreen = () => {
           <div className="form-text">
             {formik.touched.director && formik.errors.director
               ? formik.errors.director
-              : null}
+              : <>&nbsp;</>}
           </div>
         </div>
         <div className="mb-3 col-3">
@@ -99,7 +99,7 @@ const AddMovieScreen = () => {
           <div className="form-text">
             {formik.touched.year && formik.errors.year
               ? formik.errors.year
-              : null}
+              : <>&nbsp;</>}
           </div>
         </div>
         <div className="mb-3 col-3">
@@ -118,28 +118,82 @@ const AddMovieScreen = () => {
           <div className="form-text">
             {formik.touched.country && formik.errors.country
               ? formik.errors.country
-              : null}
+              : <>&nbsp;</>}
           </div>
         </div>
-        <div className="mb-3 col-4">
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <KeyboardDatePicker
-            id="watchedOn"
-            autoOk
-            disableFuture
-            disableToolbar
-            label="Watched On"
-            format="dd/MM/yyyy"
-            value={formik.values.watchedOn}
-            onChange={value => formik.setFieldValue("watchedOn", value)}
-            KeyboardButtonProps={{
-              "aria-label": "change date"
-            }}
-          />
-        </MuiPickersUtilsProvider>
+        <div className="mb-3 col-3">
+        <label className="form-label" htmlFor="country">
+          Watched On
+        </label>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              id="watchedOn"
+              autoOk
+              disableFuture
+              disableToolbar
+              format="dd/MM/yyyy"
+              value={formik.values.watchedOn}
+              onChange={(value) => formik.setFieldValue("watchedOn", value)}
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+            />
+          </MuiPickersUtilsProvider>
         </div>
-        <div className="col-3 my-auto">
-          <button type="submit" className="btn btn-primary">
+        <div className="mb-3 col-3">
+        <label className="form-label" htmlFor="rating">
+          Rating
+        </label>
+          <div className="row">
+            <div class="form-check ml-3">
+              <label className="form-check-label">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="rating"
+                  value={1}
+                  checked={formik.values.rating === 1}
+                  onChange={() => {
+                    formik.setFieldValue("rating", 1);
+                  }}
+                />
+                1
+              </label>
+            </div>
+            <div className="form-check ml-3">
+              <label className="form-check-label">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="rating"
+                  value={2}
+                  checked={formik.values.rating === 2}
+                  onChange={() => {
+                    formik.setFieldValue("rating", 2);
+                  }}
+                />
+                2
+              </label>
+            </div>
+            <div className="form-check ml-3">
+              <label className="form-check-label">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="rating"
+                  value={3}
+                  checked={formik.values.rating === 3}
+                  onChange={() => {
+                    formik.setFieldValue("rating", 3);
+                  }}
+                />
+                3
+              </label>
+            </div>
+          </div>
+        </div>
+        <div className="col-3 mx-auto my-5">
+          <button type="submit" className="btn btn-primary btn-block">
             Submit
           </button>
         </div>
