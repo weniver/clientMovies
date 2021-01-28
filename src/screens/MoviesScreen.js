@@ -5,7 +5,18 @@ import SearchIMDB from "../components/SearchIMDB.js";
 
 const MoviesScreen = () => {
   const renderMovies = () => {
-    return data.map((movie) => <MovieListItem key={movie.id} />);
+    return data.map((movie) => (
+      <MovieListItem
+        key={movie.id}
+        director={movie.director}
+        rating={movie.rating}
+        country={movie.country}
+        title={movie.title}
+        poster={movie.poster}
+        year={movie.year}
+        watchedOn="12/12/2001"
+      />
+    ));
   };
 
   const [data, setData] = useState([]);

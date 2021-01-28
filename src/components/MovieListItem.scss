@@ -2,7 +2,29 @@
   width: 100%;
   background-color: white;
   border-radius: 10px;
-  box-shadow: 0 0 3px black;
-  padding: 1rem;
-  margin: 0.5rem 0;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  margin: 2rem 0;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  box-shadow: 0px 20px 30px 3px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+.poster {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: -30%;
+  left: -10%;
+}
+.card-info {
+  margin: 2rem 0;
+}
+.blue {
+  background-color: skyblue;
+}
+.title{
+  text-transform: lowercase;
+  font-variant: small-caps;
 }
