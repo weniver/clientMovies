@@ -14,7 +14,7 @@ const MoviesScreen = () => {
         title={movie.title}
         poster={movie.poster}
         year={movie.year}
-        watchedOn="12/12/2001"
+        watchedOn="12•12•2001"
       />
     ));
   };
@@ -35,8 +35,6 @@ const MoviesScreen = () => {
 
   return (
     <div className="container">
-      <SearchIMDB />
-      <h1>MoviesScreen</h1>
       {renderMovies()}
     </div>
   );
