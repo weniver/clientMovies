@@ -2,7 +2,42 @@
   width: 100%;
   background-color: white;
   border-radius: 10px;
-  box-shadow: 0 0 3px black;
-  padding: 1rem;
-  margin: 0.5rem 0;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  margin: 1em 0;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  box-shadow: 0px 20px 30px 3px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  color: white;
+}
+.poster-movies {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: -50%;
+  left: -10%;
+}
+.card-info {
+  margin: 2rem 0;
+}
+.blue {
+  background-color: skyblue;
+}
+.title {
+  font-size: 2.5em;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.rating {
+  color: white;
+  margin: 0 0.4rem;
+}
+.watchedOn {
+  font-size: 2.2em;
+  font-weight: bolder;
 }

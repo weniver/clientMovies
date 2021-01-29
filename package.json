@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
+    "colorthief": "^2.3.2",
     "date-fns": "^2.16.1",
     "formik": "^2.2.6",
     "imdb-api": "^4.4.1",

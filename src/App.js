@@ -8,20 +8,20 @@ import Header from "./components/Header.js";
 
 function App() {
   return (
-    <Router>
-    <Header/>
-      <Switch>
-        <Route exact path="/">
-          <MoviesScreen />
-        </Route>
-        <Route exact path="/add/movie">
-          <AddMovieScreen />
-        </Route>
-        <Route path="*">
-          <Error404Screen />
-        </Route>
-      </Switch>
-    </Router>
+      <Router>
+        <Header />
+        <Switch>
+          <Route exact path="/">
+            <MoviesScreen />
+          </Route>
+          <Route exact path="/add/movie">
+            <AddMovieScreen />
+          </Route>
+          <Route path="*">
+            <Error404Screen />
+          </Route>
+        </Switch>
+      </Router>
   );
 }
 
