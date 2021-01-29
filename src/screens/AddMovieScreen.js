@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import server from "../apis/server.js";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -18,6 +19,7 @@ const AddMovieScreen = () => {
       rating: "",
       watchedOn: new Date(),
       poster: "",
+      imdbID: "",
     },
     validationSchema: yup.object({
       title: yup
@@ -37,8 +39,13 @@ const AddMovieScreen = () => {
         .min(new Date(1986, 9, 31), "Too old.")
         .max(new Date(), "No time travel."),
     }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      try {
+        const response = await server.post(`add/movie`, values);
+        console.log(response)
+      } catch (e) {
+        console.log(e);
+      }
     },
   });
   return (
@@ -59,9 +66,11 @@ const AddMovieScreen = () => {
             value={formik.values.title}
           />
           <div className="form-text">
-            {formik.touched.title && formik.errors.title
-              ? formik.errors.title
-              : <>&nbsp;</>}
+            {formik.touched.title && formik.errors.title ? (
+              formik.errors.title
+            ) : (
+              <>&nbsp;</>
+            )}
           </div>
         </div>
         <div className="mb-3 col-6">
@@ -78,9 +87,11 @@ const AddMovieScreen = () => {
             value={formik.values.director}
           />
           <div className="form-text">
-            {formik.touched.director && formik.errors.director
-              ? formik.errors.director
-              : <>&nbsp;</>}
+            {formik.touched.director && formik.errors.director ? (
+              formik.errors.director
+            ) : (
+              <>&nbsp;</>
+            )}
           </div>
         </div>
         <div className="mb-3 col-3">
@@ -97,9 +108,11 @@ const AddMovieScreen = () => {
             value={formik.values.year}
           />
           <div className="form-text">
-            {formik.touched.year && formik.errors.year
-              ? formik.errors.year
-              : <>&nbsp;</>}
+            {formik.touched.year && formik.errors.year ? (
+              formik.errors.year
+            ) : (
+              <>&nbsp;</>
+            )}
           </div>
         </div>
         <div className="mb-3 col-3">
@@ -116,15 +129,17 @@ const AddMovieScreen = () => {
             value={formik.values.country}
           />
           <div className="form-text">
-            {formik.touched.country && formik.errors.country
-              ? formik.errors.country
-              : <>&nbsp;</>}
+            {formik.touched.country && formik.errors.country ? (
+              formik.errors.country
+            ) : (
+              <>&nbsp;</>
+            )}
           </div>
         </div>
         <div className="mb-3 col-3">
-        <label className="form-label" htmlFor="country">
-          Watched On
-        </label>
+          <label className="form-label" htmlFor="country">
+            Watched On
+          </label>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
               id="watchedOn"
@@ -141,9 +156,9 @@ const AddMovieScreen = () => {
           </MuiPickersUtilsProvider>
         </div>
         <div className="mb-3 col-3">
-        <label className="form-label" htmlFor="rating">
-          Rating
-        </label>
+          <label className="form-label" htmlFor="rating">
+            Rating
+          </label>
           <div className="row">
             <div class="form-check ml-3">
               <label className="form-check-label">
