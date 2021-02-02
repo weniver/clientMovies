@@ -1,0 +1,27 @@
+.poster-wrapper {
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border: solid 5px #fbc02d;
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80%;
+  min-width: 90%;
+  & > i {
+    color: #fbc02d;
+  }
+}
+
+.poster-img {
+  width: 100%;
+  height: auto;
+}
+
+.poster-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
