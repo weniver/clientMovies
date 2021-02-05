@@ -219,14 +219,16 @@ const AddMovieScreen = () => {
             </div>
           </div>
         </div>
-        <div className="col-4 poster-col">
-          <div className="poster-wrapper">
-            {formik.values.poster === "" ? (
-              <i className="fas fa-lg fa-ticket-alt fa-5x"></i>
-            ) : (
+        <div className="col-4">
+          {formik.values.poster === "" || formik.values.poster === "N/A" ? (
+            <div className="no-image">
+              <i className="fas fa-lg fa-ticket-alt"></i>
+            </div>
+          ) : (
+            <div className="poster-wrapper">
               <img src={formik.values.poster} alt="" className="poster-img" />
-            )}
-          </div>
+            </div>
+          )}
         </div>
         <div className="col-3 mx-auto my-5">
           <button type="submit" className="btn btn-primary btn-block add-movie">
