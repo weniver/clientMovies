@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import server from "../apis/server.js";
@@ -6,11 +6,15 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
+import SearchIMDB from "../components/SearchIMDB.js";
 
 import DateFnsUtils from "@date-io/date-fns";
 import "./AddMovie.scss";
+import { useHistory } from "react-router-dom";
 
 const AddMovieScreen = () => {
+  let history = useHistory();
+
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -43,7 +47,7 @@ const AddMovieScreen = () => {
     onSubmit: async (values) => {
       try {
         const response = await server.post(`add/movie`, values);
-        console.log(response);
+        history.push("/");
       } catch (e) {
         console.log(e);
       }
@@ -55,6 +59,9 @@ const AddMovieScreen = () => {
       <form className="row" onSubmit={formik.handleSubmit}>
         <div className="col-8">
           <div className="row">
+            <div className="mb-3 col-12">
+              <SearchIMDB number={4} onClickHandler={formik.setFieldValue} />
+            </div>
             <div className="mb-3 col-12">
               <label className="form-label" htmlFor="title">
                 Title
@@ -163,7 +170,7 @@ const AddMovieScreen = () => {
                 Rating
               </label>
               <div className="row">
-                <div class="form-check ml-3">
+                <div className="form-check ml-3">
                   <label className="form-check-label">
                     <input
                       className="form-check-input"
@@ -215,7 +222,7 @@ const AddMovieScreen = () => {
         <div className="col-4 poster-col">
           <div className="poster-wrapper">
             {formik.values.poster === "" ? (
-              <i class="fas fa-lg fa-ticket-alt fa-5x"></i>
+              <i className="fas fa-lg fa-ticket-alt fa-5x"></i>
             ) : (
               <img src={formik.values.poster} alt="" className="poster-img" />
             )}

@@ -14,7 +14,7 @@ const Header = () => {
         className="header-link"
         to="/"
       >
-        <i class="fas fa-lg fa-lemon"></i>
+        <i className="fas fa-lg fa-lemon"></i>
       </Link>
       <Link
         style={{

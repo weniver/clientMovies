@@ -7,7 +7,7 @@ const MoviesScreen = () => {
   const renderMovies = () => {
     return data.map((movie) => (
       <MovieListItem
-        key={movie.id}
+        key={movie._id}
         director={movie.director}
         rating={movie.rating}
         country={movie.country}

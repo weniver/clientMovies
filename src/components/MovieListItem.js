@@ -17,7 +17,7 @@ const MovieListItem = ({
   const renderRating = (n) => {
     let items = [];
     for (let i = 0; i < n; i++) {
-      items.push(<i class="fas fa-lemon rating"></i>);
+      items.push(<i key={i} className="fas fa-lemon rating"></i>);
     }
     return items;
   };
