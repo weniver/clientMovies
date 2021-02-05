@@ -8,6 +8,7 @@ const MoviesScreen = () => {
     return data.map((movie) => (
       <MovieListItem
         key={movie._id}
+        id={movie._id}
         director={movie.director}
         rating={movie.rating}
         country={movie.country}
@@ -33,11 +34,7 @@ const MoviesScreen = () => {
     fetchData();
   }, []);
 
-  return (
-    <div className="container">
-      {renderMovies()}
-    </div>
-  );
+  return <div className="container">{renderMovies()}</div>;
 };
 
 export default MoviesScreen;
