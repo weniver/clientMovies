@@ -113,9 +113,9 @@ const SearchIMDB = (props) => {
         }}
       />
       {suggestions && openSuggestions && (
-        <div className="row suggestions-container">
-          {renderResults(suggestions)}
-        </div>
+          <div className="row suggestions-container">
+            {renderResults(suggestions)}
+          </div>
       )}
     </ClickOutsideWrapper>
   );
