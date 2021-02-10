@@ -3,7 +3,6 @@ import imdb from "../apis/imdb.js";
 import MovieSearchResult from "./MovieSearchResult.js";
 import ClickOutsideWrapper from "./ClickOutsideWrapper.js";
 
-
 const SearchIMDB = (props) => {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState("");
@@ -64,8 +63,7 @@ const SearchIMDB = (props) => {
           key={imdbID}
           onClickHandler={async () => {
             try {
-
-              setOpenSuggestions(false)
+              setOpenSuggestions(false);
               let data = await fetchDataIMDBid(imdbID);
 
               let formData = {
@@ -96,33 +94,29 @@ const SearchIMDB = (props) => {
         setOpenSuggestions(false);
       }}
     >
-      <div className="row">
-        <label className="form-label" htmlFor="title">
-          IMDB
-        </label>
-        <input
-          className="form-control"
-          id="title"
-          name="title"
-          type="text"
-          autoComplete="off"
-          value={query}
-          onFocus={() => {
-            if (suggestions.length !== 0) setOpenSuggestions(true);
-          }}
-          onChange={(e) => {
-            setQuery(e.target.value);
-          }}
-        />
-      </div>
+      <label className="form-label" htmlFor="title">
+        {props.label || "Search"}
+      </label>
+      <input
+        className="form-control"
+        id="title"
+        name="title"
+        type="text"
+        autoComplete="off"
+        value={props.value}
+        onFocus={() => {
+          if (suggestions.length !== 0) setOpenSuggestions(true);
+        }}
+        onChange={(e) => {
+          props.onClickHandler("title", e.target.value);
+          setQuery(e.target.value);
+        }}
+      />
       {suggestions && openSuggestions && (
         <div className="row suggestions-container">
           {renderResults(suggestions)}
         </div>
       )}
-      <div className="form-text">
-        <>&nbsp;</>
-      </div>
     </ClickOutsideWrapper>
   );
 };

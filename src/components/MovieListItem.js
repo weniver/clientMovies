@@ -55,9 +55,9 @@ const MovieListItem = ({
               let colorThief = new ColorThief();
               let img = imgRef.current;
               let color = await colorThief.getColor(img, 50);
-              let red = color[0] > 200 ? 200 : color[0];
-              let green = color[1] > 200 ? 200 : color[1];
-              let blue = color[2] > 200 ? 200 : color[2];
+              let red = color[0] > 220 ? 220 : color[0];
+              let green = color[1] > 220 ? 220 : color[1];
+              let blue = color[2] > 220 ? 220 : color[2];
               setMainColor(`rgb(${red},${green},${blue})`);
             } catch (e) {
               console.log(e);

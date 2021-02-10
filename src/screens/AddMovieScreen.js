@@ -60,20 +60,12 @@ const AddMovieScreen = () => {
         <div className="col-8">
           <div className="row">
             <div className="mb-3 col-12">
-              <SearchIMDB number={4} onClickHandler={formik.setFieldValue} />
-            </div>
-            <div className="mb-3 col-12">
-              <label className="form-label" htmlFor="title">
-                Title
-              </label>
-              <input
-                className="form-control"
-                id="title"
-                name="title"
-                type="text"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+              <SearchIMDB
+                label={"Title"}
                 value={formik.values.title}
+                onChangeHandler={formik.handleChange}
+                number={4}
+                onClickHandler={formik.setFieldValue}
               />
               <div className="form-text">
                 {formik.touched.title && formik.errors.title ? (
@@ -221,13 +213,25 @@ const AddMovieScreen = () => {
         </div>
         <div className="col-4">
           {formik.values.poster === "" || formik.values.poster === "N/A" ? (
-            <div className="no-image">
+            <div className="no-poster">
               <i className="fas fa-lg fa-ticket-alt"></i>
             </div>
           ) : (
-            <div className="poster-wrapper">
-              <img src={formik.values.poster} alt="" className="poster-img" />
-            </div>
+            <>
+              <div className="poster-wrapper">
+                <img src={formik.values.poster} alt="" className="poster-img" />
+              </div>
+              <div
+                onClick={() => {
+                  formik.setFieldValue("poster", "");
+                }}
+                className="remove-wrapper"
+              >
+                <p className="remove-button">
+                  remove <i className="fas fa-trash-alt"></i>
+                </p>
+              </div>
+            </>
           )}
         </div>
         <div className="col-3 mx-auto my-5">
