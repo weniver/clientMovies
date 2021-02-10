@@ -1,20 +1,38 @@
 .movie-container {
   width: 100%;
-  background-color: white;
-  border-radius: 10px;
+  background-color: #fbc02d;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
+  border-radius: 10px;
   margin: 1em 0;
   box-shadow: 0px 20px 30px 3px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   color: white;
+  outline: solid 5px transparent;
+  -webkit-transition: background-color 0.6s cubic-bezier(0, 0.55, 0.45, 1),
+    box-shadow 0.2s cubic-bezier(0.37, 0, 0.63, 1);
+  -moz-transition: background-color 0.6s cubic-bezier(0, 0.55, 0.45, 1),
+    box-shadow 0.2s cubic-bezier(0.37, 0, 0.63, 1);
+  -o-transition: background-color 0.6s cubic-bezier(0, 0.55, 0.45, 1),
+    box-shadow 0.2s cubic-bezier(0.37, 0, 0.63, 1);
+  transition: background-color 0.6s cubic-bezier(0, 0.55, 0.45, 1),
+    box-shadow 0.2s cubic-bezier(0.37, 0, 0.63, 1);
+
+  &:hover {
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2);
+  }
 }
 .poster-movies {
   width: 100%;
   height: auto;
   position: absolute;
-  top: -50%;
-  left: -10%;
+  top: 50%;
+  left: 0;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 .card-info {
   margin: 2rem 0;
@@ -37,4 +55,26 @@
 .watchedOn {
   font-size: 2.2em;
   font-weight: bolder;
+}
+.buttons-container {
+  position: absolute;
+  z-index: 1000;
+  right: 0.8rem;
+  bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+.button {
+  background-color: transparent;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+  transition: background-color 0.2s cubic-bezier(0.33, 1, 0.68, 1);
+  &:hover {
+    background-color: rgba(50, 50, 50, 0.1);
+  }
 }
