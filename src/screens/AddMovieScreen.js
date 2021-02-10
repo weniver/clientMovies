@@ -10,20 +10,21 @@ import SearchIMDB from "../components/SearchIMDB.js";
 
 import DateFnsUtils from "@date-io/date-fns";
 import "./AddMovie.scss";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
-const AddMovieScreen = () => {
+const AddMovieScreen = (props) => {
   let history = useHistory();
+  const location = useLocation();
 
   const formik = useFormik({
     initialValues: {
-      title: "",
-      year: "",
-      director: "",
-      country: "",
-      rating: "",
-      watchedOn: new Date(),
-      poster: "",
+      title: location.state?.title || "",
+      year: location.state?.year || "",
+      director: location.state?.director || "",
+      country: location.state?.country || "",
+      rating: location.state?.rating || "",
+      watchedOn: location.state?.watchedOn || new Date(),
+      poster: location.state?.poster || "",
       imdbID: "",
     },
     validationSchema: yup.object({
@@ -139,9 +140,11 @@ const AddMovieScreen = () => {
               </div>
             </div>
             <div className="mb-3 col-6">
-              <label className="form-label" htmlFor="country">
-                Watched On
-              </label>
+              <div className="col-12 p-0">
+                <label className="form-label" htmlFor="country">
+                  Watched On
+                </label>
+              </div>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
                   id="watchedOn"

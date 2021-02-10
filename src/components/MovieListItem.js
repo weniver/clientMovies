@@ -3,6 +3,7 @@ import ColorThief from "colorthief";
 import "./MovieListItem.scss";
 import server from "../apis/server.js";
 import { useHistory } from "react-router-dom";
+import DateFnsAdapter from "@date-io/date-fns";
 
 const MovieListItem = ({
   title,
@@ -14,6 +15,11 @@ const MovieListItem = ({
   poster,
   id,
 }) => {
+
+    let dateFns = new DateFnsAdapter();
+    let watchedOnFns = dateFns.date(watchedOn);
+    let formatedWatchedOn = dateFns.format(watchedOnFns, 'd•M•yyyy')
+
   const imgRef = useRef(null);
   const [mainColor, setMainColor] = useState("rgb(251,192,45)");
   const [showButtons, setShowButtons] = useState(false);
@@ -40,8 +46,19 @@ const MovieListItem = ({
     <div
       onMouseEnter={() => setShowButtons(true)}
       onMouseLeave={() => setShowButtons(false)}
+      onClick={() => {
+        history.push(`/edit/movie/${id}`, {
+          title: title,
+          year: year,
+          director: director,
+          country: country,
+          rating: rating,
+          watchedOn: watchedOn,
+          poster: poster,
+        });
+      }}
       style={{
-        backgroundColor: mainColor
+        backgroundColor: mainColor,
       }}
       className="movie-container row"
     >
@@ -96,7 +113,7 @@ const MovieListItem = ({
           </div>
           <div className="col-3">
             <div className="row">
-              <p className="watchedOn">{watchedOn}</p>
+              <p className="watchedOn">{formatedWatchedOn}</p>
             </div>
           </div>
         </div>
