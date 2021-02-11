@@ -4,25 +4,19 @@ import "./MovieListItem.scss";
 import server from "../apis/server.js";
 import { useHistory } from "react-router-dom";
 import DateFnsAdapter from "@date-io/date-fns";
+import ModalFullScreen from "../components/ModalFullScreen.js";
+import SimpleCard from "./SimpleCard.js";
+import FontAwesomeButton from "./FontAwesomeButton.js";
 
-const MovieListItem = ({
-  title,
-  rating,
-  year,
-  country,
-  director,
-  watchedOn,
-  poster,
-  id,
-}) => {
-
-    let dateFns = new DateFnsAdapter();
-    let watchedOnFns = dateFns.date(watchedOn);
-    let formatedWatchedOn = dateFns.format(watchedOnFns, 'd•M•yyyy')
+const MovieListItem = ({ movie }) => {
+  let dateFns = new DateFnsAdapter();
+  let watchedOnFns = dateFns.date(movie.watchedOn);
+  let formatedWatchedOn = dateFns.format(watchedOnFns, "d•M•yyyy");
 
   const imgRef = useRef(null);
   const [mainColor, setMainColor] = useState("rgb(251,192,45)");
   const [showButtons, setShowButtons] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   let history = useHistory();
 
   const renderRating = (n) => {
@@ -36,27 +30,21 @@ const MovieListItem = ({
   const handleDelete = async (id) => {
     try {
       let response = await server.post(`/movie/${id}?_method=DELETE`);
+      setModalOpen(false);
       history.go(0);
     } catch (e) {
       console.log(e);
     }
   };
 
+  const handleEdit = (movieData) => {
+    history.push(`/edit/movie/${movieData._id}`, movieData);
+  };
+
   return (
     <div
       onMouseEnter={() => setShowButtons(true)}
       onMouseLeave={() => setShowButtons(false)}
-      onClick={() => {
-        history.push(`/edit/movie/${id}`, {
-          title: title,
-          year: year,
-          director: director,
-          country: country,
-          rating: rating,
-          watchedOn: watchedOn,
-          poster: poster,
-        });
-      }}
       style={{
         backgroundColor: mainColor,
       }}
@@ -65,7 +53,7 @@ const MovieListItem = ({
       <div className="col-2">
         <img
           crossOrigin="anonymous"
-          src={poster}
+          src={movie.poster}
           ref={imgRef}
           onLoad={async () => {
             try {
@@ -81,7 +69,7 @@ const MovieListItem = ({
             }
           }}
           className="poster-movies"
-          alt={title}
+          alt={movie.title}
         />
       </div>
       <div className="col-10">
@@ -90,7 +78,15 @@ const MovieListItem = ({
             <div
               className="button"
               onClick={() => {
-                handleDelete(id);
+                handleEdit(movie);
+              }}
+            >
+              <i className="fas fa-pencil-alt"></i>
+            </div>
+            <div
+              className="button"
+              onClick={() => {
+                setModalOpen(true);
               }}
             >
               <i className="fas fa-trash-alt"></i>
@@ -101,14 +97,14 @@ const MovieListItem = ({
           <div className="col-8">
             <div className="row">
               <h3 style={{ color: "white" }} className="title">
-                {title}
+                {movie.title}
               </h3>
             </div>
             <div className="row">
               <p style={{ color: "white", opacity: "0.9" }}>
-                {director}, {country}, {year}
+                {movie.director}, {movie.country}, {movie.year}
               </p>
-              <div className="ml-3">{renderRating(rating)}</div>
+              <div className="ml-3">{renderRating(movie.rating)}</div>
             </div>
           </div>
           <div className="col-3">
@@ -118,6 +114,40 @@ const MovieListItem = ({
           </div>
         </div>
       </div>
+      {modalOpen && (
+        <ModalFullScreen
+          style={{ backdropFilter: "blur(10px)" }}
+          clickOutsideHandler={() => {
+            setModalOpen(false);
+          }}
+        >
+          <SimpleCard>
+            <div className="col-12">
+              <h2 style={{ color: "black", marginBottom: "2rem" }}>
+                ¿Are you sure you want to delete the movie?
+              </h2>
+            </div>
+            <div className="col-4 ml-auto">
+              <div className="row justify-content-end">
+                <FontAwesomeButton
+                  onClickHandler={() => {
+                    setModalOpen(false);
+                  }}
+                  style={{ color: "tomato" }}
+                  fontAwesomeClasses="far fa-times-circle button"
+                />
+                <FontAwesomeButton
+                  onClickHandler={() => {
+                    handleDelete(movie._id);
+                  }}
+                  style={{ color: "limegreen" }}
+                  fontAwesomeClasses="far fa-check-circle button"
+                />
+              </div>
+            </div>
+          </SimpleCard>
+        </ModalFullScreen>
+      )}
     </div>
   );
 };

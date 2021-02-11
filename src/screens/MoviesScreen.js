@@ -6,19 +6,7 @@ import SearchIMDB from "../components/SearchIMDB.js";
 const MoviesScreen = () => {
   const renderMovies = () => {
     return data.map((movie) => {
-      return (
-        <MovieListItem
-          key={movie._id}
-          id={movie._id}
-          director={movie.director}
-          rating={movie.rating}
-          country={movie.country}
-          title={movie.title}
-          poster={movie.poster}
-          year={movie.year}
-          watchedOn={movie.watchedOn}
-        />
-      );
+      return <MovieListItem key={movie._id} id={movie._id} movie={movie} />;
     });
   };
 

@@ -34,7 +34,7 @@ const SearchIMDB = (props) => {
         console.log(e);
       }
     };
-    fetchData(query);
+    if (query !== "") fetchData(query);
   }, [query, props.number]);
 
   const fetchDataIMDBid = async (i) => {
@@ -113,9 +113,9 @@ const SearchIMDB = (props) => {
         }}
       />
       {suggestions && openSuggestions && (
-          <div className="row suggestions-container">
-            {renderResults(suggestions)}
-          </div>
+        <div className="row suggestions-container">
+          {renderResults(suggestions)}
+        </div>
       )}
     </ClickOutsideWrapper>
   );

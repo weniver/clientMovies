@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import server from "../apis/server.js";
@@ -9,22 +9,24 @@ import {
 import SearchIMDB from "../components/SearchIMDB.js";
 
 import DateFnsUtils from "@date-io/date-fns";
-import "./AddMovie.scss";
+import "./MovieFormScreen.scss";
 import { useHistory, useLocation } from "react-router-dom";
 
-const AddMovieScreen = (props) => {
-  let history = useHistory();
+const MovieFormScreen = (props) => {
+  const history = useHistory();
   const location = useLocation();
+  const [onEditPage, setOnEditPage] = useState(false);
+  const [pathName, setPathName] = useState("");
 
   const formik = useFormik({
     initialValues: {
-      title: location.state?.title || "",
-      year: location.state?.year || "",
-      director: location.state?.director || "",
-      country: location.state?.country || "",
-      rating: location.state?.rating || "",
-      watchedOn: location.state?.watchedOn || new Date(),
-      poster: location.state?.poster || "",
+      title: "",
+      year: "",
+      director: "",
+      country: "",
+      rating: "",
+      watchedOn: new Date(),
+      poster: "",
       imdbID: "",
     },
     validationSchema: yup.object({
@@ -45,18 +47,48 @@ const AddMovieScreen = (props) => {
         .min(new Date(1986, 9, 31), "Too old.")
         .max(new Date(), "No time travel."),
     }),
-    onSubmit: async (values) => {
-      try {
-        const response = await server.post(`add/movie`, values);
-        history.push("/");
-      } catch (e) {
-        console.log(e);
-      }
+    onSubmit: (values) => {
+      handleSubmit(values);
     },
   });
+
+  const resetForm = formik.resetForm;
+  const setFieldValue = formik.setFieldValue;
+
+  useEffect(() => {
+    let pathName = location.pathname;
+    setPathName(pathName);
+    setOnEditPage(pathName.includes("/edit/movie"));
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (onEditPage) {
+      let stateData = location.state;
+      for (let key in stateData) {
+        if (stateData.hasOwnProperty(key)) {
+          setFieldValue(key, stateData[key]);
+        }
+      }
+    } else {
+      resetForm();
+    }
+  }, [onEditPage, location.state, resetForm, setFieldValue]);
+
+  const handleSubmit = async (values) => {
+    try {
+      let endPoint = pathName;
+      if (onEditPage) endPoint += "?_method=PATCH";
+      console.log(values);
+      await server.post(endPoint, values);
+      history.push("/");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <div className="col-8 mx-auto">
-      <h1 className="my-3">Add a movie:</h1>
+      <h1 className="my-3">{onEditPage ? "Edit a movie" : "Add a movie:"}</h1>
       <form className="row" onSubmit={formik.handleSubmit}>
         <div className="col-8">
           <div className="row">
@@ -239,11 +271,11 @@ const AddMovieScreen = (props) => {
         </div>
         <div className="col-3 mx-auto my-5">
           <button type="submit" className="btn btn-primary btn-block add-movie">
-            ADD MOVIE
+            {onEditPage ? "EDIT MOVIE" : "ADD MOVIE"}
           </button>
         </div>
       </form>
     </div>
   );
 };
-export default AddMovieScreen;
+export default MovieFormScreen;
