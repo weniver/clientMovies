@@ -1,6 +1,5 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MoviesScreen from "./screens/MoviesScreen.js";
 import MovieFormScreen from "./screens/MovieFormScreen.js";
 import Error404Screen from "./screens/Error404Screen.js";

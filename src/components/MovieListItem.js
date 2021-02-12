@@ -29,7 +29,7 @@ const MovieListItem = ({ movie }) => {
 
   const handleDelete = async (id) => {
     try {
-      let response = await server.post(`/movie/${id}?_method=DELETE`);
+      await server.post(`/movie/${id}?_method=DELETE`);
       setModalOpen(false);
       history.go(0);
     } catch (e) {

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import server from "../apis/server.js";
 import MovieListItem from "../components/MovieListItem.js";
-import SearchIMDB from "../components/SearchIMDB.js";
 
 const MoviesScreen = () => {
   const renderMovies = () => {

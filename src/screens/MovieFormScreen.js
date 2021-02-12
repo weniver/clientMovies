@@ -77,8 +77,7 @@ const MovieFormScreen = (props) => {
   const handleSubmit = async (values) => {
     try {
       let endPoint = pathName;
-      if (onEditPage) endPoint += "?_method=PATCH";
-      console.log(values);
+      if (onEditPage) endPoint = `/movie/${values._id}?_method=PATCH`;
       await server.post(endPoint, values);
       history.push("/");
     } catch (e) {
