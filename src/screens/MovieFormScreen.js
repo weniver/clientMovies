@@ -108,7 +108,6 @@ const MovieFormScreen = (props) => {
                 value={formik.values.title}
                 onChangeHandler={formik.handleChange}
                 number={4}
-                closeSuggestionsEscKey
                 onClickHandler={formik.setFieldValue}
               />
               <div className="form-text">
