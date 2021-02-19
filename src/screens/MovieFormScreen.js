@@ -85,10 +85,21 @@ const MovieFormScreen = (props) => {
     }
   };
 
+  const preventSubmitOnEnterKey = (e) => {
+    if (e.key === "Enter") e.preventDefault();
+  };
+
   return (
     <div className="col-8 mx-auto">
       <h1 className="my-3">{onEditPage ? "Edit a movie" : "Add a movie:"}</h1>
-      <form className="row" onSubmit={formik.handleSubmit}>
+      <form
+        onKeyPress={(e) => {
+          preventSubmitOnEnterKey(e);
+        }}
+        className="row"
+        autoComplete="off"
+        onSubmit={formik.handleSubmit}
+      >
         <div className="col-8">
           <div className="row">
             <div className="mb-3 col-12">
@@ -97,6 +108,7 @@ const MovieFormScreen = (props) => {
                 value={formik.values.title}
                 onChangeHandler={formik.handleChange}
                 number={4}
+                closeSuggestionsEscKey
                 onClickHandler={formik.setFieldValue}
               />
               <div className="form-text">

@@ -116,7 +116,6 @@ const MovieListItem = ({ movie }) => {
       </div>
       {modalOpen && (
         <ModalFullScreen
-          style={{ backdropFilter: "blur(10px)" }}
           clickOutsideHandler={() => {
             setModalOpen(false);
           }}

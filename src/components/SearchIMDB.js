@@ -88,6 +88,10 @@ const SearchIMDB = (props) => {
     ));
   };
 
+  const closeSuggestionsKeyHandler = (e) => {
+    if (e.key === "Escape" || e.key === "Tab") setOpenSuggestions(false);
+  };
+
   return (
     <ClickOutsideWrapper
       handler={() => {
@@ -103,6 +107,9 @@ const SearchIMDB = (props) => {
         name="title"
         type="text"
         autoComplete="off"
+        onKeyDown={(e) => {
+          closeSuggestionsKeyHandler(e);
+        }}
         value={props.value}
         onFocus={() => {
           if (suggestions.length !== 0) setOpenSuggestions(true);
