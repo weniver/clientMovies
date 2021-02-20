@@ -7,15 +7,14 @@
   margin: 1em 0;
   box-shadow: 0px 20px 30px 3px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  color: white;
   outline: solid 5px transparent;
-  -webkit-transition: background-color 0.6s cubic-bezier(0, 0.55, 0.45, 1),
+  -webkit-transition: all 0.6s cubic-bezier(0, 0.55, 0.45, 1),
     box-shadow 0.2s cubic-bezier(0.37, 0, 0.63, 1);
-  -moz-transition: background-color 0.6s cubic-bezier(0, 0.55, 0.45, 1),
+  -moz-transition: all 0.6s cubic-bezier(0, 0.55, 0.45, 1),
     box-shadow 0.2s cubic-bezier(0.37, 0, 0.63, 1);
-  -o-transition: background-color 0.6s cubic-bezier(0, 0.55, 0.45, 1),
+  -o-transition: all 0.6s cubic-bezier(0, 0.55, 0.45, 1),
     box-shadow 0.2s cubic-bezier(0.37, 0, 0.63, 1);
-  transition: background-color 0.6s cubic-bezier(0, 0.55, 0.45, 1),
+  transition: all 0.6s cubic-bezier(0, 0.55, 0.45, 1),
     box-shadow 0.2s cubic-bezier(0.37, 0, 0.63, 1);
 
   &:hover {
@@ -49,7 +48,6 @@
   overflow: hidden;
 }
 .rating {
-  color: white;
   margin: 0 0.4rem;
 }
 .watchedOn {

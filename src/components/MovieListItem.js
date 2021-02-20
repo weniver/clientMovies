@@ -12,34 +12,27 @@ import SimpleCard from "./SimpleCard.js";
 import "./MovieListItem.scss";
 
 const MovieListItem = ({ movie }) => {
-  let dateFns = new DateFnsAdapter();
-  let watchedOnFns = dateFns.date(movie.watchedOn);
-  let formatedWatchedOn = dateFns.format(watchedOnFns, "d•M•yyyy");
-
-  const imgRef = useRef(null);
-  const [mainColor, setMainColor] = useState("rgb(251,192,45)");
+  //States
+  const [backgroundColorRGB, setBackgroundColorRGB] = useState({
+    red: 251,
+    green: 192,
+    blue: 45,
+  });
+  const [fontColor, setFontColor] = useState("#ffffff");
   const [showButtons, setShowButtons] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+
+  //Navigation
   let history = useHistory();
 
-  const renderRating = (n) => {
-    let items = [];
-    for (let i = 0; i < n; i++) {
-      items.push(<i key={i} className="fas fa-lemon rating"></i>);
-    }
-    return items;
+  //Dates
+  let dateFns = new DateFnsAdapter();
+
+  const formatDate = (date) => {
+    return dateFns.format(dateFns.date(date), "d•M•yyyy");
   };
 
-  const handleDelete = async (id) => {
-    try {
-      await server.post(`/movie/${id}?_method=DELETE`);
-      setModalOpen(false);
-      history.go(0);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
+  //Info Format
   const handleEdit = (movieData) => {
     history.push(`/edit/movie/${movieData._id}`, movieData);
   };
@@ -56,15 +49,56 @@ const MovieListItem = ({ movie }) => {
     return joinArrayWithComa(removeEmptyStrings(data));
   };
 
+  //Main Color Poster
+  const imgRef = useRef(null);
+
   const getImgMainColorRGBUsingRef = async (ref) => {
     try {
       let colorThief = new ColorThief();
       let img = ref.current;
       let color = await colorThief.getColor(img, 50);
-      let red = color[0] > 225 ? 225 : color[0];
-      let green = color[1] > 225 ? 225 : color[1];
-      let blue = color[2] > 225 ? 225 : color[2];
-      return { red, green, blue };
+      return { red: color[0], green: color[1], blue: color[2] };
+    } catch (e) {
+      console.log(e);
+      //return default color if error
+    }
+  };
+
+  const fontColorForBackgroundColor = (backgroundColorRGB) => {
+    let lumPrimaryColors = {};
+    for (var primaryColor in backgroundColorRGB) {
+      let pColorValue = backgroundColorRGB[primaryColor];
+      pColorValue = pColorValue / 255;
+      if (pColorValue <= 0.03928) {
+        pColorValue = pColorValue / 12.92;
+      } else {
+        pColorValue = Math.pow((pColorValue + 0.055) / 1.055, 2.4);
+        lumPrimaryColors[primaryColor] = pColorValue;
+      }
+    }
+    var colorLum =
+      0.2126 * lumPrimaryColors.red +
+      0.7152 * lumPrimaryColors.green +
+      0.0722 * lumPrimaryColors.blue;
+
+    return colorLum > 0.179 ? "#0F0F0F" : "#ffffff";
+  };
+
+  //Render Helpers
+  const renderRating = (n) => {
+    let items = [];
+    for (let i = 0; i < n; i++) {
+      items.push(<i key={i} className="fas fa-lemon rating"></i>);
+    }
+    return items;
+  };
+
+  //Handlers
+  const handleDelete = async (id) => {
+    try {
+      await server.post(`/movie/${id}?_method=DELETE`);
+      setModalOpen(false);
+      history.go(0);
     } catch (e) {
       console.log(e);
     }
@@ -75,7 +109,12 @@ const MovieListItem = ({ movie }) => {
       onMouseEnter={() => setShowButtons(true)}
       onMouseLeave={() => setShowButtons(false)}
       style={{
-        backgroundColor: mainColor,
+        backgroundColor: `rgb(${backgroundColorRGB.red},${backgroundColorRGB.green},${backgroundColorRGB.blue})`,
+        color: fontColor,
+        backgroundImage: `linear-gradient(to right,
+          rgb(${backgroundColorRGB.red},${backgroundColorRGB.green},${backgroundColorRGB.blue}),
+          rgb(${backgroundColorRGB.red+5},${backgroundColorRGB.green+5},${backgroundColorRGB.blue+5}),
+          rgb(${backgroundColorRGB.red+10},${backgroundColorRGB.green+10},${backgroundColorRGB.blue+10}))`,
       }}
       className="movie-container row"
     >
@@ -86,10 +125,14 @@ const MovieListItem = ({ movie }) => {
             src={movie.poster}
             ref={imgRef}
             onLoad={async () => {
-              let colorRGB = await getImgMainColorRGBUsingRef(imgRef);
-              setMainColor(
-                `rgb(${colorRGB.red},${colorRGB.green},${colorRGB.blue})`
-              );
+              try {
+                let colorRGB = await getImgMainColorRGBUsingRef(imgRef);
+                setBackgroundColorRGB(colorRGB);
+                let fontColor = fontColorForBackgroundColor(colorRGB);
+                setFontColor(fontColor);
+              } catch (e) {
+                console.log(e);
+              }
             }}
             className="poster-movies"
             alt={movie.title}
@@ -122,12 +165,10 @@ const MovieListItem = ({ movie }) => {
         <div className="row card-info align-items-center justify-content-between">
           <div className="col-8">
             <div className="row">
-              <h3 style={{ color: "white" }} className="title">
-                {movie.title}
-              </h3>
+              <h3 className="title">{movie.title}</h3>
             </div>
             <div className="row">
-              <p style={{ color: "white", opacity: "0.9" }}>
+              <p style={{ opacity: "0.9" }}>
                 {formatMovieInfo(movie.director, movie.country, movie.year)}
               </p>
               <div className="ml-3">{renderRating(movie.rating)}</div>
@@ -135,7 +176,7 @@ const MovieListItem = ({ movie }) => {
           </div>
           <div className="col-3">
             <div className="row">
-              <p className="watchedOn">{formatedWatchedOn}</p>
+              <p className="watchedOn">{formatDate(movie.watchedOn)}</p>
             </div>
           </div>
         </div>
