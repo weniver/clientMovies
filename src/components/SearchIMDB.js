@@ -52,40 +52,50 @@ const SearchIMDB = (props) => {
     }
   };
 
-  const renderResults = (results) => {
-    return results.map(({ Title, Type, Year, Poster, imdbID }) => (
-      <div className="col-12" key={imdbID}>
-        <MovieSearchResult
-          year={Year}
-          img={Poster}
-          title={Title}
-          type={Type}
-          key={imdbID}
-          onClickHandler={async () => {
-            try {
-              setOpenSuggestions(false);
-              let data = await fetchDataIMDBid(imdbID);
+  const yearRangeToStartYear = (string) => {
+    if (string.includes("–")) {
+      return string.split("–")[0];
+    }
+    return string;
+  };
 
-              let formData = {
-                director: data.Director,
-                year: data.Year,
-                title: data.Title,
-                country: data.Country,
-                poster: data.Poster,
-                imdbID: data.imdbID,
-              };
-              for (let key in formData) {
-                if (formData.hasOwnProperty(key)) {
-                  props.onClickHandler(key, formData[key]);
+  const renderResults = (results) => {
+    return results.map(({ Title, Type, Year, Poster, imdbID }) => {
+      return (
+        <div className="col-12" key={imdbID}>
+          <MovieSearchResult
+            year={yearRangeToStartYear(Year)}
+            img={Poster}
+            title={Title}
+            type={Type}
+            key={imdbID}
+            onClickHandler={async () => {
+              try {
+                setOpenSuggestions(false);
+                let data = await fetchDataIMDBid(imdbID);
+
+                let formData = {
+                  director: data.Director,
+                  year: yearRangeToStartYear(data.Year),
+                  title: data.Title,
+                  country: data.Country,
+                  poster: data.Poster,
+                  imdbID: data.imdbID,
+                };
+                for (let key in formData) {
+                  if (formData.hasOwnProperty(key)) {
+                    if (formData[key] === "N/A") formData[key] = "";
+                    props.onClickHandler(key, formData[key]);
+                  }
                 }
+              } catch (e) {
+                console.log(e);
               }
-            } catch (e) {
-              console.log(e);
-            }
-          }}
-        />
-      </div>
-    ));
+            }}
+          />
+        </div>
+      );
+    });
   };
 
   const closeSuggestionsKeyHandler = (e) => {
