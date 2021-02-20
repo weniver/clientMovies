@@ -1,12 +1,15 @@
 import React, { useRef, useState } from "react";
-import ColorThief from "colorthief";
-import "./MovieListItem.scss";
-import server from "../apis/server.js";
 import { useHistory } from "react-router-dom";
+
+import ColorThief from "colorthief";
+import FontAwesomeButton from "./FontAwesomeButton.js";
 import DateFnsAdapter from "@date-io/date-fns";
+
+import server from "../apis/server.js";
 import ModalFullScreen from "../components/ModalFullScreen.js";
 import SimpleCard from "./SimpleCard.js";
-import FontAwesomeButton from "./FontAwesomeButton.js";
+
+import "./MovieListItem.scss";
 
 const MovieListItem = ({ movie }) => {
   let dateFns = new DateFnsAdapter();
@@ -41,6 +44,32 @@ const MovieListItem = ({ movie }) => {
     history.push(`/edit/movie/${movieData._id}`, movieData);
   };
 
+  const removeEmptyStrings = (array) => {
+    return array.filter((string) => string !== "");
+  };
+
+  const joinArrayWithComa = (stringData) => {
+    return stringData.join(", ");
+  };
+
+  const formatMovieInfo = (...data) => {
+    return joinArrayWithComa(removeEmptyStrings(data));
+  };
+
+  const getImgMainColorRGBUsingRef = async (ref) => {
+    try {
+      let colorThief = new ColorThief();
+      let img = ref.current;
+      let color = await colorThief.getColor(img, 50);
+      let red = color[0] > 225 ? 225 : color[0];
+      let green = color[1] > 225 ? 225 : color[1];
+      let blue = color[2] > 225 ? 225 : color[2];
+      return { red, green, blue };
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <div
       onMouseEnter={() => setShowButtons(true)}
@@ -50,27 +79,24 @@ const MovieListItem = ({ movie }) => {
       }}
       className="movie-container row"
     >
-      <div className="col-2">
-        <img
-          crossOrigin="anonymous"
-          src={movie.poster}
-          ref={imgRef}
-          onLoad={async () => {
-            try {
-              let colorThief = new ColorThief();
-              let img = imgRef.current;
-              let color = await colorThief.getColor(img, 50);
-              let red = color[0] > 200 ? 200 : color[0];
-              let green = color[1] > 200 ? 200 : color[1];
-              let blue = color[2] > 200 ? 200 : color[2];
-              setMainColor(`rgb(${red},${green},${blue})`);
-            } catch (e) {
-              console.log(e);
-            }
-          }}
-          className="poster-movies"
-          alt={movie.title}
-        />
+      <div className="col-2 d-flex justify-content-center align-items-center">
+        {movie.poster ? (
+          <img
+            crossOrigin="anonymous"
+            src={movie.poster}
+            ref={imgRef}
+            onLoad={async () => {
+              let colorRGB = await getImgMainColorRGBUsingRef(imgRef);
+              setMainColor(
+                `rgb(${colorRGB.red},${colorRGB.green},${colorRGB.blue})`
+              );
+            }}
+            className="poster-movies"
+            alt={movie.title}
+          />
+        ) : (
+          <i className="fas fa-lemon fa-3x"></i>
+        )}
       </div>
       <div className="col-10">
         {showButtons && (
@@ -102,7 +128,7 @@ const MovieListItem = ({ movie }) => {
             </div>
             <div className="row">
               <p style={{ color: "white", opacity: "0.9" }}>
-                {movie.director}, {movie.country}, {movie.year}
+                {formatMovieInfo(movie.director, movie.country, movie.year)}
               </p>
               <div className="ml-3">{renderRating(movie.rating)}</div>
             </div>
