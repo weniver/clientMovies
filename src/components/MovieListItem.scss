@@ -1,3 +1,6 @@
+$main-color: #fbc02d;
+
+
 .movie-container {
   width: 100%;
   background-color: #fbc02d;
@@ -7,7 +10,6 @@
   margin: 1em 0;
   box-shadow: 0px 20px 30px 3px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  outline: solid 5px transparent;
   -webkit-transition: all 0.6s cubic-bezier(0, 0.55, 0.45, 1),
     box-shadow 0.2s cubic-bezier(0.37, 0, 0.63, 1);
   -moz-transition: all 0.6s cubic-bezier(0, 0.55, 0.45, 1),
@@ -21,6 +23,7 @@
     box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2);
   }
 }
+
 .poster-movies {
   width: 100%;
   height: auto;
@@ -33,27 +36,46 @@
   -o-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+
+@media (max-width: 1199.98px) {
+  .movie-container {
+    box-shadow: 0px 0px 0px 0px rgba(100, 100, 100, 1);
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    margin: 0;
+    border-bottom: 1px solid white;
+  }
+  .poster-movies {
+    width: 150%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+}
 .card-info {
   margin: 2rem 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
-.blue {
-  background-color: skyblue;
-}
+
 .title {
-  font-size: 2.5em;
-  text-transform: lowercase;
-  font-variant: small-caps;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
+
 .rating {
   margin: 0 0.4rem;
 }
-.watchedOn {
-  font-size: 2.2em;
-  font-weight: bolder;
-}
+
 .buttons-container {
   position: absolute;
   display: flex;

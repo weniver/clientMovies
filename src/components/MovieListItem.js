@@ -32,6 +32,11 @@ const MovieListItem = ({ movie }) => {
     return dateFns.format(dateFns.date(date), "d•M•yyyy");
   };
 
+  const createDateArray = (date) => {
+    let dateFns = dateFns.date(date);
+    return [dateFns.getDay, dateFns.getMonth, dateFns.getYear];
+  };
+
   //Info Format
   const handleEdit = (movieData) => {
     history.push(`/edit/movie/${movieData._id}`, movieData);
@@ -112,13 +117,22 @@ const MovieListItem = ({ movie }) => {
         backgroundColor: `rgb(${backgroundColorRGB.red},${backgroundColorRGB.green},${backgroundColorRGB.blue})`,
         color: fontColor,
         backgroundImage: `linear-gradient(to right,
-          rgb(${backgroundColorRGB.red},${backgroundColorRGB.green},${backgroundColorRGB.blue}),
-          rgb(${backgroundColorRGB.red+5},${backgroundColorRGB.green+5},${backgroundColorRGB.blue+5}),
-          rgb(${backgroundColorRGB.red+10},${backgroundColorRGB.green+10},${backgroundColorRGB.blue+10}))`,
+          rgb(${backgroundColorRGB.red},${backgroundColorRGB.green},${
+          backgroundColorRGB.blue
+        }),
+          rgb(${backgroundColorRGB.red + 5},${backgroundColorRGB.green + 5},${
+          backgroundColorRGB.blue + 5
+        }),
+          rgb(${backgroundColorRGB.red + 10},${backgroundColorRGB.green + 10},${
+          backgroundColorRGB.blue + 10
+        }))`,
       }}
       className="movie-container row"
     >
-      <div className="col-2 d-flex justify-content-center align-items-center">
+      <div
+        style={{ overflow: "hidden" }}
+        className="col-2 d-flex justify-content-center align-items-center"
+      >
         {movie.poster ? (
           <img
             crossOrigin="anonymous"
@@ -165,19 +179,17 @@ const MovieListItem = ({ movie }) => {
         <div className="row card-info align-items-center justify-content-between">
           <div className="col-8">
             <div className="row">
-              <h3 className="title">{movie.title}</h3>
+              <h2 className="title">{movie.title}</h2>
             </div>
             <div className="row">
-              <p style={{ opacity: "0.9" }}>
+              <h4>
                 {formatMovieInfo(movie.director, movie.country, movie.year)}
-              </p>
+              </h4>
               <div className="ml-3">{renderRating(movie.rating)}</div>
             </div>
           </div>
           <div className="col-3">
-            <div className="row">
-              <p className="watchedOn">{formatDate(movie.watchedOn)}</p>
-            </div>
+            <h2>{formatDate(movie.watchedOn)}</h2>
           </div>
         </div>
       </div>

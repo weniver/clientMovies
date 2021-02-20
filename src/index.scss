@@ -1,4 +1,4 @@
-@import '~bootstrap/scss/bootstrap.scss';
+@import "~bootstrap/scss/bootstrap.scss";
 
 @import "../node_modules/bootstrap/scss/functions";
 @import "../node_modules/bootstrap/scss/variables";
@@ -11,6 +11,11 @@
 @import "../node_modules/bootstrap/scss/code";
 @import "../node_modules/bootstrap/scss/grid";
 
+$warning-color: tomato;
+$correct-color: limegreen;
+$main-color: #fbc02d;
+$black-font: #f0f0f0;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -18,9 +23,32 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+}
+p {
+  color: $black-font;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+h2 {
+  font-size: 2.3rem;
+  text-transform: lowercase;
+  font-variant: small-caps;
+}
+
+h4 {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+@include media-breakpoint-down(lg) {
+  h2 {
+    font-size: 1.9rem;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  h2 {
+    font-size: 1.5rem;
+  }
 }
