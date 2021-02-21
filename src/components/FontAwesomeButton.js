@@ -11,7 +11,7 @@ const FontAwesomeButton = ({ onClickHandler, fontAwesomeClasses, style }) => {
       className={styles["button-wrapper"]}
     >
       <i
-        className={`icon ${
+        className={`${styles["icon"]} ${
           fontAwesomeClasses ? fontAwesomeClasses : "far fa-question-circle"
         }`}
       ></i>

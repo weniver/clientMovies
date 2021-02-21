@@ -19,7 +19,7 @@ const MovieListItem = ({ movie }) => {
     blue: 45,
   });
   const [fontColor, setFontColor] = useState("#ffffff");
-  const [showButtons, setShowButtons] = useState(false);
+  const [showButtons, setShowButtons] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
 
   //Navigation
@@ -130,7 +130,7 @@ const MovieListItem = ({ movie }) => {
       className="movie-container row"
     >
       <div
-        style={{ overflow: "hidden"}}
+        style={{ overflow: "hidden" }}
         className="col-2 col-sm-2 col-lg-2 d-flex justify-content-center align-items-center"
       >
         {movie.poster ? (
@@ -158,22 +158,18 @@ const MovieListItem = ({ movie }) => {
       <div className="col-10 col-sm-10 col-lg-10 p-0">
         {showButtons && (
           <div className="buttons-container">
-            <div
-              className="button"
-              onClick={() => {
+            <FontAwesomeButton
+              onClickHandler={() => {
                 handleEdit(movie);
               }}
-            >
-              <i className="fas fa-pencil-alt"></i>
-            </div>
-            <div
-              className="button"
-              onClick={() => {
+              fontAwesomeClasses="fas fa-pencil-alt"
+            />
+            <FontAwesomeButton
+              onClickHandler={() => {
                 setModalOpen(true);
               }}
-            >
-              <i className="fas fa-trash-alt"></i>
-            </div>
+              fontAwesomeClasses="fas fa-trash-alt"
+            />
           </div>
         )}
         <div className="row card-info align-items-center justify-content-between">
