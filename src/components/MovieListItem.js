@@ -197,22 +197,26 @@ const MovieListItem = ({ movie }) => {
                 ¿Are you sure you want to delete the movie?
               </h2>
             </div>
-            <div className="col-4 ml-auto">
-              <div className="row justify-content-end">
-                <FontAwesomeButton
-                  onClickHandler={() => {
-                    setModalOpen(false);
-                  }}
-                  style={{ color: "tomato" }}
-                  fontAwesomeClasses="far fa-times-circle button"
-                />
-                <FontAwesomeButton
-                  onClickHandler={() => {
-                    handleDelete(movie._id);
-                  }}
-                  style={{ color: "limegreen" }}
-                  fontAwesomeClasses="far fa-check-circle button"
-                />
+            <div className="row justify-content-end">
+              <div className="col-3">
+                <div className="row justify-content-around">
+                  <FontAwesomeButton
+                    fontSize="4rem"
+                    onClickHandler={() => {
+                      setModalOpen(false);
+                    }}
+                    style={{ color: "#0F0F0F" }}
+                    fontAwesomeClasses="fas fa-undo"
+                  />
+                  <FontAwesomeButton
+                    fontSize="4rem"
+                    onClickHandler={() => {
+                      handleDelete(movie._id);
+                    }}
+                    style={{ color: "tomato" }}
+                    fontAwesomeClasses="fas fa-trash-alt"
+                  />
+                </div>
               </div>
             </div>
           </SimpleCard>

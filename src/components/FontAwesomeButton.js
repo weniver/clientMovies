@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./FontAwesomeButton.module.scss";
 
-const FontAwesomeButton = ({ fontSize, onClickHandler, fontAwesomeClasses, style }) => {
+const FontAwesomeButton = ({ fontSize, onClickHandler, fontAwesomeClasses,style }) => {
   return (
     <div style={{ fontSize: `${fontSize || "2rem"}` }}>
       <div

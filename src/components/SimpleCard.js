@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./SimpleCard.module.scss";
 
-const SimpleCard = ({ customSyle, children }) => {
+const SimpleCard = ({ style, children }) => {
   return (
-    <div className={styles.card}>
+    <div style={{ ...style }} className={styles["card"]}>
       {children}
     </div>
   );
