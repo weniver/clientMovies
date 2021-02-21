@@ -1,9 +1,8 @@
 $main-color: #fbc02d;
 
-
 .movie-container {
   width: 100%;
-  background-color: #fbc02d;
+  background-color: $main-color;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
@@ -36,44 +35,26 @@ $main-color: #fbc02d;
   -o-transform: translateY(-50%);
   transform: translateY(-50%);
 }
-
-@media (max-width: 1199.98px) {
-  .movie-container {
-    box-shadow: 0px 0px 0px 0px rgba(100, 100, 100, 1);
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    border-radius: 0px;
-    margin: 0;
-    border-bottom: 1px solid white;
-  }
-  .poster-movies {
-    width: 150%;
-    height: auto;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-  }
-}
 .card-info {
   margin: 2rem 0;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-.title {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.rating {
-  margin: 0 0.4rem;
+.title {
+  line-height: 85%;
+  margin: 0 0 0.2rem;
+}
+
+.no-wrap-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.rating-lemons {
+  margin: 0 0.8rem 0 0;
 }
 
 .buttons-container {
@@ -98,5 +79,25 @@ $main-color: #fbc02d;
   transition: background-color 0.2s cubic-bezier(0.33, 1, 0.68, 1);
   &:hover {
     background-color: rgba(50, 50, 50, 0.1);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .movie-container {
+    box-shadow: 0px 0px 0px 0px rgba(100, 100, 100, 1);
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    margin: 0;
+    border-bottom: 0.3rem solid white;
+  }
+  .poster-movies {
+    width: 250%;
+    height: auto;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
   }
 }

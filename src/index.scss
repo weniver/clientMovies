@@ -14,7 +14,7 @@
 $warning-color: tomato;
 $correct-color: limegreen;
 $main-color: #fbc02d;
-$black-font: #f0f0f0;
+$black-font: #0F0F0F;
 
 body {
   margin: 0;
@@ -25,6 +25,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
 }
+
 p {
   color: $black-font;
 }

@@ -23,7 +23,7 @@ const MoviesScreen = () => {
     fetchData();
   }, []);
 
-  return <div className="container-lg p-0 p-lg-4">{renderMovies()}</div>;
+  return <div className="container-lg p-0">{renderMovies()}</div>;
 };
 
 export default MoviesScreen;

@@ -93,7 +93,7 @@ const MovieListItem = ({ movie }) => {
   const renderRating = (n) => {
     let items = [];
     for (let i = 0; i < n; i++) {
-      items.push(<i key={i} className="fas fa-lemon rating"></i>);
+      items.push(<i key={i} className="fas fa-lemon rating-lemons"></i>);
     }
     return items;
   };
@@ -130,8 +130,8 @@ const MovieListItem = ({ movie }) => {
       className="movie-container row"
     >
       <div
-        style={{ overflow: "hidden" }}
-        className="col-2 d-flex justify-content-center align-items-center"
+        style={{ overflow: "hidden"}}
+        className="col-2 col-sm-2 col-lg-2 d-flex justify-content-center align-items-center"
       >
         {movie.poster ? (
           <img
@@ -155,7 +155,7 @@ const MovieListItem = ({ movie }) => {
           <i className="fas fa-lemon fa-3x"></i>
         )}
       </div>
-      <div className="col-10">
+      <div className="col-10 col-sm-10 col-lg-10 p-0">
         {showButtons && (
           <div className="buttons-container">
             <div
@@ -177,19 +177,15 @@ const MovieListItem = ({ movie }) => {
           </div>
         )}
         <div className="row card-info align-items-center justify-content-between">
-          <div className="col-8">
-            <div className="row">
-              <h2 className="title">{movie.title}</h2>
-            </div>
-            <div className="row">
-              <h4>
-                {formatMovieInfo(movie.director, movie.country, movie.year)}
-              </h4>
-              <div className="ml-3">{renderRating(movie.rating)}</div>
-            </div>
+          <div className="col-12 col-md-8 col-lg-9">
+            {renderRating(movie.rating)}
+            <h2 className="no-wrap-ellipsis title">{movie.title}</h2>
+            <h4 className="no-wrap-ellipsis">
+              {formatMovieInfo(movie.director, movie.country, movie.year)}
+            </h4>
           </div>
-          <div className="col-3">
-            <h2>{formatDate(movie.watchedOn)}</h2>
+          <div className="col-12 col-md-4 col-lg-3">
+            <h2 className="watched-on">{formatDate(movie.watchedOn)}</h2>
           </div>
         </div>
       </div>
