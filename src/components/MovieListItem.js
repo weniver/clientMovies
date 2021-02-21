@@ -19,7 +19,7 @@ const MovieListItem = ({ movie }) => {
     blue: 45,
   });
   const [fontColor, setFontColor] = useState("#ffffff");
-  const [showButtons, setShowButtons] = useState(true);
+  const [showButtons, setShowButtons] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
   //Navigation
