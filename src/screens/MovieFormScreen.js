@@ -40,11 +40,19 @@ const MovieFormScreen = (props) => {
         .min(1887, "Older than first movie.")
         .max(new Date().getFullYear(), "No future movies please.")
         .integer("Enter a valid year."),
-      director: yup.string().max(50, "Must be 50 characters or less"),
-      country: yup.string().max(74, "Only real countries."),
+      director: yup
+        .string()
+        .max(50, "Must be 50 characters or less")
+        .typeError("Only real people."),
+      country: yup
+        .string()
+        .max(74, "Only real countries.")
+        .typeError("Only real countries."),
       watchedOn: yup
         .date()
-        .min(new Date(1986, 9, 31), "Too old.")
+        .required("You need a date.")
+        .typeError("You need a date.")
+        .min(new Date(1900, 9, 31), "Too old.")
         .max(new Date(), "No time travel."),
     }),
     onSubmit: (values) => {
@@ -183,15 +191,17 @@ const MovieFormScreen = (props) => {
                 </div>
               </div>
               <div className="mb-3 col-6">
-                <label className="form-label" htmlFor="country">
+                <label className="form-label" htmlFor="watchedOn">
                   Watched On
                 </label>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     id="watchedOn"
                     autoOk
+                    error={false}
                     disableFuture
                     disableToolbar
+                    helperText={null}
                     format="d•M•yyyy"
                     value={formik.values.watchedOn}
                     onChange={(value) =>
