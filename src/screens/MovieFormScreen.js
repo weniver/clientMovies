@@ -192,86 +192,13 @@ const MovieFormScreen = (props) => {
                 </div>
               </div>
               <div className="mb-3 col-6">
-                <label className="form-label" htmlFor="rating">
-                  Rating
-                </label>
-                <div className="row">
-                  <div className="form-check ml-3">
-                    <label className="form-check-label">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="rating"
-                        value={1}
-                        checked={formik.values.rating === 1}
-                        onChange={() => {
-                          formik.setFieldValue("rating", 1);
-                        }}
-                      />
-                      1
-                    </label>
-                  </div>
-                  <div className="form-check ml-3">
-                    <label className="form-check-label">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="rating"
-                        value={2}
-                        checked={formik.values.rating === 2}
-                        onChange={() => {
-                          formik.setFieldValue("rating", 2);
-                        }}
-                      />
-                      2
-                    </label>
-                  </div>
-                  <div className="form-check ml-3">
-                    <label className="form-check-label">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="rating"
-                        value={3}
-                        checked={formik.values.rating === 3}
-                        onChange={() => {
-                          formik.setFieldValue("rating", 3);
-                        }}
-                      />
-                      3
-                    </label>
-                  </div>
-                  <div className="form-check ml-3">
-                    <label className="form-check-label">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="rating"
-                        value={4}
-                        checked={formik.values.rating === 4}
-                        onChange={() => {
-                          formik.setFieldValue("rating", 4);
-                        }}
-                      />
-                      4
-                    </label>
-                  </div>
-                  <div className="form-check ml-3">
-                    <label className="form-check-label">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="rating"
-                        value={5}
-                        checked={formik.values.rating === 5}
-                        onChange={() => {
-                          formik.setFieldValue("rating", 5);
-                        }}
-                      />
-                      5
-                    </label>
-                  </div>
-                </div>
+                <LemonRatings
+                  number={5}
+                  value={formik.values.rating}
+                  onClickHandler={(n) => {
+                    formik.setFieldValue("rating", n);
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -310,7 +237,6 @@ const MovieFormScreen = (props) => {
               {onEditPage ? "EDIT MOVIE" : "ADD MOVIE"}
             </button>
           </div>
-          <LemonRatings/>
         </form>
       </div>
     </div>
