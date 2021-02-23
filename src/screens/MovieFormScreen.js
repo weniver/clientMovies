@@ -33,7 +33,7 @@ const MovieFormScreen = (props) => {
     validationSchema: yup.object({
       title: yup
         .string()
-        .max(50, "Must be 50 characters or less")
+        .max(100, "Must be 100 characters or less")
         .required("The movie needs a title."),
       year: yup
         .number()
