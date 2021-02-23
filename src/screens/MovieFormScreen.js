@@ -8,7 +8,7 @@ import {
 } from "@material-ui/pickers";
 import SearchIMDB from "../components/SearchIMDB.js";
 import TextInput from "../components/TextInput.js";
-
+import LemonRatings from "../components/LemonRatings.js";
 import DateFnsUtils from "@date-io/date-fns";
 import "./MovieFormScreen.scss";
 import { useHistory, useLocation } from "react-router-dom";
@@ -310,6 +310,7 @@ const MovieFormScreen = (props) => {
               {onEditPage ? "EDIT MOVIE" : "ADD MOVIE"}
             </button>
           </div>
+          <LemonRatings/>
         </form>
       </div>
     </div>
