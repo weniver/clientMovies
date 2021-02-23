@@ -38,13 +38,13 @@ const LemonRatings = ({touched, errors, label, htmlFor, number, value, onClickHa
 
   return (
     <div>
-      <label className="form-label" htmlFor={htmlFor}>
+      <label className={`form-label ${styles.label}`} htmlFor={htmlFor}>
         {label || "Rating"}
       </label>
       <div className={`${styles["lemons-wrapper"]}`}>
         {renderLemons(number || 5)}
       </div>
-      <div className="form-text">
+      <div className={`form-text ${styles.error}`}>
         {touched && errors ? errors : <>&nbsp;</>}
       </div>
     </div>

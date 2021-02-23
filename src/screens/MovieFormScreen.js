@@ -161,10 +161,11 @@ const MovieFormScreen = (props) => {
                   errors={formik.errors.country}
                 />
               </div>
-              <div className="mb-3 col-6">
+              <div className="mb-3 col-12 col-md-6">
                 <label className="form-label" htmlFor="watchedOn">
                   Watched On
                 </label>
+                <div>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     id="watchedOn"
@@ -183,6 +184,7 @@ const MovieFormScreen = (props) => {
                     }}
                   />
                 </MuiPickersUtilsProvider>
+                </div>
                 <div className="form-text">
                   {formik.touched.watchedOn && formik.errors.watchedOn ? (
                     formik.errors.watchedOn
@@ -191,7 +193,7 @@ const MovieFormScreen = (props) => {
                   )}
                 </div>
               </div>
-              <div className="mb-3 col-6">
+              <div className="mb-3 col-12 col-md-6">
                 <LemonRatings
                   number={5}
                   value={formik.values.rating}
