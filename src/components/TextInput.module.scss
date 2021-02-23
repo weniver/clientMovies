@@ -1,0 +1,22 @@
+@import "../variables";
+
+.error {
+  color: $warning-color;
+}
+
+.label {
+  text-transform: lowercase;
+  font-variant: small-caps;
+}
+
+.input {
+  border-radius: 0px;
+  border: 0;
+  border-bottom: solid 2px $main-color;
+  transition: all 0.1s ease-in-out;
+  &:focus {
+    box-shadow: none !important;
+    outline: none !important;
+    border-bottom: solid 4px $main-color;
+  }
+}

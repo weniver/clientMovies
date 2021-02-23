@@ -2,11 +2,24 @@ import React, { useState, useEffect } from "react";
 import imdb from "../apis/imdb.js";
 import MovieSearchResult from "./MovieSearchResult.js";
 import ClickOutsideWrapper from "./ClickOutsideWrapper.js";
+import TextInput from "../components/TextInput.js";
 
-const SearchIMDB = (props) => {
+const SearchIMDB = ({
+  label,
+  id,
+  name,
+  formik,
+  onBlurHandler,
+  onChangeHandler,
+  value,
+  touched,
+  errors,
+  number,
+  onClickHandler,
+}) => {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState("");
-  const [openSuggestions, setOpenSuggestions] = useState("false");
+  const [openSuggestions, setOpenSuggestions] = useState(false);
 
   useEffect(() => {
     const fetchData = async (q) => {
@@ -26,7 +39,7 @@ const SearchIMDB = (props) => {
           setOpenSuggestions(false);
         } else {
           let data = response.data.Search;
-          if (props.number) data.splice(props.number);
+          if (number) data.splice(number);
           setSuggestions(data);
           setOpenSuggestions(true);
         }
@@ -35,7 +48,7 @@ const SearchIMDB = (props) => {
       }
     };
     if (query !== "") fetchData(query);
-  }, [query, props.number]);
+  }, [query, number]);
 
   const fetchDataIMDBid = async (i) => {
     try {
@@ -85,7 +98,7 @@ const SearchIMDB = (props) => {
                 for (let key in formData) {
                   if (formData.hasOwnProperty(key)) {
                     if (formData[key] === "N/A") formData[key] = "";
-                    props.onClickHandler(key, formData[key]);
+                    onClickHandler(key, formData[key]);
                   }
                 }
               } catch (e) {
@@ -108,24 +121,22 @@ const SearchIMDB = (props) => {
         setOpenSuggestions(false);
       }}
     >
-      <label className="form-label" htmlFor="title">
-        {props.label || "Search"}
-      </label>
-      <input
-        className="form-control"
-        id="title"
-        name="title"
-        type="text"
-        autoComplete="off"
-        onKeyDown={(e) => {
+      <TextInput
+        id={id}
+        name={name}
+        label={label || "Search Movie"}
+        onChangeHandler={onChangeHandler}
+        value={value}
+        touched={touched}
+        errors={errors}
+        onKeyDownHandler={(e) => {
           closeSuggestionsKeyHandler(e);
         }}
-        value={props.value}
-        onFocus={() => {
+        onFocusHandler={() => {
           if (suggestions.length !== 0) setOpenSuggestions(true);
         }}
-        onChange={(e) => {
-          props.onClickHandler("title", e.target.value);
+        onChangeHandler={(e) => {
+          onClickHandler(id, e.target.value);
           setQuery(e.target.value);
         }}
       />

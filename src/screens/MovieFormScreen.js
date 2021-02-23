@@ -7,6 +7,7 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import SearchIMDB from "../components/SearchIMDB.js";
+import TextInput from "../components/TextInput.js";
 
 import DateFnsUtils from "@date-io/date-fns";
 import "./MovieFormScreen.scss";
@@ -113,82 +114,52 @@ const MovieFormScreen = (props) => {
             <div className="row">
               <div className="mb-3 col-12">
                 <SearchIMDB
-                  label={"Title"}
+                  label="title"
+                  id="title"
+                  name="title"
                   value={formik.values.title}
                   onChangeHandler={formik.handleChange}
                   number={4}
                   onClickHandler={formik.setFieldValue}
+                  touched={formik.touched.title}
+                  errors={formik.errors.title}
                 />
-                <div className="form-text">
-                  {formik.touched.title && formik.errors.title ? (
-                    formik.errors.title
-                  ) : (
-                    <>&nbsp;</>
-                  )}
-                </div>
               </div>
               <div className="mb-3 col-12">
-                <label className="form-label custom-title" htmlFor="title">
-                  Director
-                </label>
-                <input
-                  className="form-control custom"
+                <TextInput
                   id="director"
                   name="director"
-                  type="text"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
+                  label="director"
+                  onChangeHandler={formik.handleChange}
+                  onBlurHandler={formik.handleBlur}
                   value={formik.values.director}
+                  touched={formik.touched.director}
+                  errors={formik.errors.director}
                 />
-                <div className="form-text">
-                  {formik.touched.director && formik.errors.director ? (
-                    formik.errors.director
-                  ) : (
-                    <>&nbsp;</>
-                  )}
-                </div>
               </div>
               <div className="mb-3 col-6">
-                <label className="form-label" htmlFor="year">
-                  Year
-                </label>
-                <input
-                  className="form-control"
+                <TextInput
                   id="year"
                   name="year"
-                  type="text"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
+                  label="year"
+                  onChangeHandler={formik.handleChange}
+                  onBlurHandler={formik.handleBlur}
                   value={formik.values.year}
+                  touched={formik.touched.year}
+                  errors={formik.errors.year}
                 />
-                <div className="form-text">
-                  {formik.touched.year && formik.errors.year ? (
-                    formik.errors.year
-                  ) : (
-                    <>&nbsp;</>
-                  )}
-                </div>
               </div>
               <div className="mb-3 col-6">
-                <label className="form-label" htmlFor="country">
-                  Country
-                </label>
-                <input
-                  className="form-control"
+                <TextInput
                   id="country"
                   name="country"
-                  type="text"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
+                  label="country"
+                  onChangeHandler={formik.handleChange}
+                  onBlurHandler={formik.handleBlur}
                   value={formik.values.country}
+                  touched={formik.touched.country}
+                  errors={formik.errors.country}
                 />
-                <div className="form-text">
-                  {formik.touched.country && formik.errors.country ? (
-                    formik.errors.country
-                  ) : (
-                    <>&nbsp;</>
-                  )}
-                </div>
               </div>
               <div className="mb-3 col-6">
                 <label className="form-label" htmlFor="watchedOn">
@@ -268,6 +239,36 @@ const MovieFormScreen = (props) => {
                         }}
                       />
                       3
+                    </label>
+                  </div>
+                  <div className="form-check ml-3">
+                    <label className="form-check-label">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="rating"
+                        value={4}
+                        checked={formik.values.rating === 4}
+                        onChange={() => {
+                          formik.setFieldValue("rating", 4);
+                        }}
+                      />
+                      4
+                    </label>
+                  </div>
+                  <div className="form-check ml-3">
+                    <label className="form-check-label">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="rating"
+                        value={5}
+                        checked={formik.values.rating === 5}
+                        onChange={() => {
+                          formik.setFieldValue("rating", 5);
+                        }}
+                      />
+                      5
                     </label>
                   </div>
                 </div>
