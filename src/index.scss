@@ -11,10 +11,7 @@
 @import "../node_modules/bootstrap/scss/code";
 @import "../node_modules/bootstrap/scss/grid";
 
-$warning-color: tomato;
-$correct-color: limegreen;
-$main-color: #fbc02d;
-$black-font: #0F0F0F;
+@import "variables";
 
 body {
   margin: 0;

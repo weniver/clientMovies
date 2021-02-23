@@ -128,11 +128,11 @@ const MovieFormScreen = (props) => {
                 </div>
               </div>
               <div className="mb-3 col-12">
-                <label className="form-label" htmlFor="title">
+                <label className="form-label custom-title" htmlFor="title">
                   Director
                 </label>
                 <input
-                  className="form-control"
+                  className="form-control custom"
                   id="director"
                   name="director"
                   type="text"

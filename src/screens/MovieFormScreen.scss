@@ -1,8 +1,10 @@
+@import "../variables";
+
 @mixin border-poster($border-width, $radius) {
   border-radius: $radius;
   -webkit-border-radius: $radius;
   -moz-border-radius: $radius;
-  border: solid $border-width #fbc02d;
+  border: solid $border-width $main-color;
 }
 .poster-img {
   max-width: 100%;
@@ -19,8 +21,26 @@
   @include border-poster(4px, 10px);
   position: relative;
   & > i {
-    color: #fbc02d;
+    color: $main-color;
     font-size: 3rem;
+  }
+}
+.form-text {
+  color: $warning-color;
+}
+.custom-title {
+  text-transform: lowercase;
+  font-variant: small-caps;
+}
+.custom {
+  border-radius: 0px;
+  border: 0;
+  border-bottom: solid 2px $main-color;
+  transition: all 0.1s ease-in-out;
+  &:focus {
+    box-shadow: none !important;
+    outline: none !important;
+    border-bottom: solid 4px $main-color;
   }
 }
 
@@ -36,7 +56,7 @@
   flex: 1;
   justify-content: flex-end;
   & > .remove-button {
-    color: #fbc02d;
+    color: $main-color;
   }
   &:hover {
     opacity: 0.8;
