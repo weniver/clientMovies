@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./TextInput.module.scss";
+import InputLabel from "./InputLabel.js";
+import InputError from "./InputError.js";
 
 const TextInput = ({
   label,
@@ -15,11 +17,7 @@ const TextInput = ({
 }) => {
   return (
     <>
-      {label && (
-        <label className={`form-label ${styles.label}`} htmlFor="title">
-          {label}
-        </label>
-      )}
+      {label && <InputLabel label={label} />}
       <input
         className={`form-control ${styles.input}`}
         id={id}
@@ -39,9 +37,7 @@ const TextInput = ({
           })
         }
       />
-      <div className={`form-text ${styles.error}`}>
-        {touched && errors ? errors : <>&nbsp;</>}
-      </div>
+      <InputError touched={touched} errors={errors} />
     </>
   );
 };

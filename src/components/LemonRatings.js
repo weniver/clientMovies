@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from "react";
 import styles from "./LemonRatings.module.scss";
+import InputLabel from "./InputLabel.js";
+import InputError from "./InputError.js";
 
-const LemonRatings = ({touched, errors, label, htmlFor, number, value, onClickHandler }) => {
+const LemonRatings = ({
+  touched,
+  errors,
+  label,
+  htmlFor,
+  number,
+  value,
+  onClickHandler,
+}) => {
   const [hover, setHover] = useState(0);
   const [rating, setRating] = useState(0);
 
@@ -38,15 +48,11 @@ const LemonRatings = ({touched, errors, label, htmlFor, number, value, onClickHa
 
   return (
     <div>
-      <label className={`form-label ${styles.label}`} htmlFor={htmlFor}>
-        {label || "Rating"}
-      </label>
+      <InputLabel label={label || "Ratings"} />
       <div className={`${styles["lemons-wrapper"]}`}>
         {renderLemons(number || 5)}
       </div>
-      <div className={`form-text ${styles.error}`}>
-        {touched && errors ? errors : <>&nbsp;</>}
-      </div>
+      <InputError errors={errors} touched={touched} />
     </div>
   );
 };

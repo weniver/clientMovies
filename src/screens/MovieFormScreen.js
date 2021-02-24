@@ -2,16 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import server from "../apis/server.js";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from "@material-ui/pickers";
+
 import SearchIMDB from "../components/SearchIMDB.js";
 import TextInput from "../components/TextInput.js";
 import LemonRatings from "../components/LemonRatings.js";
-import DateFnsUtils from "@date-io/date-fns";
 import "./MovieFormScreen.scss";
 import { useHistory, useLocation } from "react-router-dom";
+import DatePicker from "../components/DatePicker.js";
 
 const MovieFormScreen = (props) => {
   const history = useHistory();
@@ -161,39 +158,19 @@ const MovieFormScreen = (props) => {
                   errors={formik.errors.country}
                 />
               </div>
-              <div className="mb-3 col-12 col-md-6">
-                <label className="form-label" htmlFor="watchedOn">
-                  Watched On
-                </label>
-                <div>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDatePicker
-                    id="watchedOn"
-                    autoOk
-                    error={false}
-                    disableFuture
-                    disableToolbar
-                    helperText={null}
-                    format="d•M•yyyy"
-                    value={formik.values.watchedOn}
-                    onChange={(value) =>
-                      formik.setFieldValue("watchedOn", value)
-                    }
-                    KeyboardButtonProps={{
-                      "aria-label": "change date",
-                    }}
-                  />
-                </MuiPickersUtilsProvider>
-                </div>
-                <div className="form-text">
-                  {formik.touched.watchedOn && formik.errors.watchedOn ? (
-                    formik.errors.watchedOn
-                  ) : (
-                    <>&nbsp;</>
-                  )}
-                </div>
+              <div className="mb-3 col-12 col-sm-6">
+                <DatePicker
+                  label="Watched On"
+                  id="watchedOn"
+                  onChangeHandler={(n) => {
+                    formik.setFieldValue("watchedOn", n);
+                  }}
+                  value={formik.values.watchedOn}
+                  errors={formik.errors.watchedOn}
+                  touched={formik.touched.watchedOn}
+                />
               </div>
-              <div className="mb-3 col-12 col-md-6">
+              <div className="mb-3 col-12 col-sm-6">
                 <LemonRatings
                   number={5}
                   value={formik.values.rating}
