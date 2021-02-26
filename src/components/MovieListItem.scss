@@ -92,7 +92,19 @@
     border-bottom: 0.3rem solid white;
   }
   .poster-movies {
-    width: 230%;
+    width: 100%;
+    height: auto;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+}
+
+@media (max-width: 500px) {
+  .poster-movies {
+    width: 200%;
     height: auto;
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);

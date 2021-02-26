@@ -131,7 +131,7 @@ const MovieListItem = ({ movie }) => {
     >
       <div
         style={{ overflow: "hidden" }}
-        className="col-2 col-sm-2 col-lg-2 d-flex justify-content-center align-items-center"
+        className="col-3 col-lg-2 d-flex justify-content-center align-items-center"
       >
         {movie.poster ? (
           <img
@@ -155,7 +155,7 @@ const MovieListItem = ({ movie }) => {
           <i className="fas fa-lemon fa-3x"></i>
         )}
       </div>
-      <div className="col-10 col-sm-10 col-lg-10 p-0">
+      <div className="col-9 col-lg-10 p-0">
         {showButtons && (
           <div className="buttons-container">
             <FontAwesomeButton
