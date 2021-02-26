@@ -9,6 +9,7 @@ import LemonRatings from "../components/LemonRatings.js";
 import "./MovieFormScreen.scss";
 import { useHistory, useLocation } from "react-router-dom";
 import DatePicker from "../components/DatePicker.js";
+import StyledButton from "../components/StyledButton.js";
 
 const MovieFormScreen = (props) => {
   const history = useHistory();
@@ -209,12 +210,9 @@ const MovieFormScreen = (props) => {
             )}
           </div>
           <div className="col-12 col-md-4 mx-auto my-5">
-            <button
-              type="submit"
-              className="btn btn-primary btn-block add-movie"
-            >
+            <StyledButton primary type="submit">
               {onEditPage ? "EDIT MOVIE" : "ADD MOVIE"}
-            </button>
+            </StyledButton>
           </div>
         </form>
       </div>

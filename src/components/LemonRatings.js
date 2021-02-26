@@ -38,6 +38,7 @@ const LemonRatings = ({
               setRating(i + 1);
             }
           }}
+          key={i}
           className={`${
             i + 1 <= hover || i + 1 <= rating ? "fas" : "far"
           } fa-lemon ${styles["lemon"]}`}
