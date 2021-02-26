@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import server from "../apis/server.js";
@@ -16,6 +16,8 @@ const MovieFormScreen = (props) => {
   const location = useLocation();
   const [onEditPage, setOnEditPage] = useState(false);
   const [pathName, setPathName] = useState("");
+
+  const formRef = useRef();
 
   const formik = useFormik({
     initialValues: {
@@ -63,6 +65,10 @@ const MovieFormScreen = (props) => {
   const setFieldValue = formik.setFieldValue;
 
   useEffect(() => {
+    if (!formik.isValid) formRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [formik.isValid]);
+
+  useEffect(() => {
     let pathName = location.pathname;
     setPathName(pathName);
     setOnEditPage(pathName.includes("/edit/movie"));
@@ -101,6 +107,7 @@ const MovieFormScreen = (props) => {
       <div className="col-12 col-lg-10 mx-auto">
         <h1 className="my-3">{onEditPage ? "Edit a movie" : "Add a movie:"}</h1>
         <form
+          ref={formRef}
           onKeyPress={(e) => {
             preventSubmitOnEnterKey(e);
           }}
