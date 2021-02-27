@@ -26,10 +26,8 @@ const SearchIMDB = ({
       try {
         let response = await imdb.get("", {
           params: {
-            apikey: "ea28638c",
             s: `${query}`,
             page: 1,
-            r: "json",
           },
         });
         //If there are to many results, no data returns so we close suggestions
@@ -54,9 +52,7 @@ const SearchIMDB = ({
     try {
       let response = await imdb.get("", {
         params: {
-          apikey: "ea28638c",
           i: i,
-          r: "json",
         },
       });
       return response.data;
