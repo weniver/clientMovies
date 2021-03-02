@@ -32,12 +32,13 @@ const MovieListItem = ({ movie }) => {
     return dateFns.format(dateFns.date(date), "d•M•yyyy");
   };
 
-  const createDateArray = (date) => {
-    let dateFns = dateFns.date(date);
-    return [dateFns.getDay, dateFns.getMonth, dateFns.getYear];
-  };
+  // const createDateArray = (date) => {
+  //   let dateFns = dateFns.date(date);
+  //   return [dateFns.getDay, dateFns.getMonth, dateFns.getYear];
+  // };
 
   //Info Format
+
   const handleEdit = (movieData) => {
     history.push(`/edit/movie/${movieData._id}`, movieData);
   };

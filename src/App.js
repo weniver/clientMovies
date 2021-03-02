@@ -5,7 +5,7 @@ import MovieFormScreen from "./screens/MovieFormScreen.js";
 import Error404Screen from "./screens/Error404Screen.js";
 import Header from "./components/Header.js";
 
-import styled, { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 
 const theme = {
   colors: {

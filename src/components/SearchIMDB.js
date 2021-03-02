@@ -121,7 +121,6 @@ const SearchIMDB = ({
         id={id}
         name={name}
         label={label || "Search Movie"}
-        onChangeHandler={onChangeHandler}
         value={value}
         touched={touched}
         errors={errors}
