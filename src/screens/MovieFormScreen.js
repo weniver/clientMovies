@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import server from "../apis/server.js";
 
 import SearchIMDB from "../components/SearchIMDB.js";
 import TextInput from "../components/TextInput.js";
@@ -11,11 +10,14 @@ import { useHistory, useLocation } from "react-router-dom";
 import DatePicker from "../components/DatePicker.js";
 import StyledButton from "../components/StyledButton.js";
 
+import { postMovie, patchMovie } from "../redux/moviesSlice.js";
+import { useDispatch } from "react-redux";
+
 const MovieFormScreen = (props) => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
   const [onEditPage, setOnEditPage] = useState(false);
-  const [pathName, setPathName] = useState("");
 
   const formRef = useRef();
 
@@ -70,7 +72,6 @@ const MovieFormScreen = (props) => {
 
   useEffect(() => {
     let pathName = location.pathname;
-    setPathName(pathName);
     setOnEditPage(pathName.includes("/edit/movie"));
   }, [location.pathname]);
 
@@ -89,9 +90,11 @@ const MovieFormScreen = (props) => {
 
   const handleSubmit = async (values) => {
     try {
-      let endPoint = pathName;
-      if (onEditPage) endPoint = `/movie/${values._id}?_method=PATCH`;
-      await server.post(endPoint, values);
+      if (onEditPage) {
+        await dispatch(patchMovie(values));
+      } else {
+        await dispatch(postMovie(values));
+      }
       history.push("/");
     } catch (e) {
       console.log(e);

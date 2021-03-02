@@ -11,13 +11,19 @@ import SimpleCard from "./SimpleCard.js";
 
 import "./MovieListItem.scss";
 
+import { deleteMovie } from "../redux/moviesSlice.js";
+import { useDispatch } from "react-redux";
+
 const MovieListItem = ({ movie }) => {
+  //Redux
+  const dispatch = useDispatch();
   //States
   const [backgroundColorRGB, setBackgroundColorRGB] = useState({
     red: 251,
     green: 192,
     blue: 45,
   });
+
   const [fontColor, setFontColor] = useState("#ffffff");
   const [showButtons, setShowButtons] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -99,12 +105,10 @@ const MovieListItem = ({ movie }) => {
     return items;
   };
 
-  //Handlers
   const handleDelete = async (id) => {
     try {
-      await server.post(`/movie/${id}?_method=DELETE`);
-      setModalOpen(false);
-      history.go(0);
+      await dispatch(deleteMovie(id));
+      setModalOpen(false)
     } catch (e) {
       console.log(e);
     }

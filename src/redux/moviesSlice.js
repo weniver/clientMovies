@@ -26,9 +26,20 @@ export const moviesSlice = createSlice({
         state.error = action.payload;
       }
     },
-    deleteMovie: (state, action) => {
+    removeMovie: (state, action) => {
       let id = action.payload;
       state.data = state.data.filter((movie) => movie._id !== id);
+    },
+    addMovie: (state, action) => {
+      let movieData = action.payload;
+      state.data = [movieData, ...state.data];
+    },
+    editMovie: (state, action) => {
+      let movieData = action.payload;
+      state.data = state.data.map((movie) => {
+        if (movieData._id === movie._id) return movieData;
+        return movie;
+      });
     },
   },
 });
@@ -37,7 +48,9 @@ export const {
   moviesLoading,
   moviesReceived,
   moviesError,
-  deleteMovie,
+  removeMovie,
+  addMovie,
+  editMovie,
 } = moviesSlice.actions;
 
 export const fetchAllMovies = () => {
@@ -48,6 +61,39 @@ export const fetchAllMovies = () => {
       dispatch(moviesReceived(response.data));
     } catch (e) {
       dispatch(moviesError(JSON.stringify(e)));
+    }
+  };
+};
+
+export const deleteMovie = (id) => {
+  return async (dispatch) => {
+    try {
+      await server.post(`/movie/${id}?_method=DELETE`);
+      dispatch(removeMovie(id));
+    } catch (e) {
+      throw "Error deleting movie. Please try again";
+    }
+  };
+};
+
+export const postMovie = (values) => {
+  return async (dispatch) => {
+    try {
+      await server.post(`add/movie`, values);
+      dispatch(addMovie(values));
+    } catch (e) {
+      throw "Error saving movie. Please try again";
+    }
+  };
+};
+
+export const patchMovie = (values) => {
+  return async (dispatch) => {
+    try {
+      await server.post(`/movie/${values._id}?_method=PATCH`, values);
+      dispatch(editMovie(values));
+    } catch (e) {
+      throw "Error editing movie. Please try again";
     }
   };
 };
