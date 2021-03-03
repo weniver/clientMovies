@@ -13,7 +13,7 @@ const MoviesScreen = () => {
 
   const renderMovies = (data) => {
     return data.map((movie) => {
-      return <MovieListItem key={movie._id} id={movie._id} movie={movie} />;
+      return <MovieListItem key={movie._id} movie={movie} />;
     });
   };
 
