@@ -5,7 +5,6 @@ import ColorThief from "colorthief";
 import FontAwesomeButton from "./FontAwesomeButton.js";
 import DateFnsAdapter from "@date-io/date-fns";
 
-import server from "../apis/server.js";
 import ModalFullScreen from "../components/ModalFullScreen.js";
 import SimpleCard from "./SimpleCard.js";
 
@@ -108,9 +107,9 @@ const MovieListItem = ({ movie }) => {
   const handleDelete = async (id) => {
     try {
       await dispatch(deleteMovie(id));
-      setModalOpen(false)
     } catch (e) {
-      console.log(e);
+      console.log(e)
+      setModalOpen(false);
     }
   };
 
@@ -151,6 +150,7 @@ const MovieListItem = ({ movie }) => {
                 setFontColor(fontColor);
               } catch (e) {
                 console.log(e);
+                setModalOpen(false);
               }
             }}
             className="poster-movies"

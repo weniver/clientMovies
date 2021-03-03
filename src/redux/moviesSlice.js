@@ -71,7 +71,7 @@ export const deleteMovie = (id) => {
       await server.post(`/movie/${id}?_method=DELETE`);
       dispatch(removeMovie(id));
     } catch (e) {
-      throw "Error deleting movie. Please try again";
+      throw new Error("Error deleting movie. Please try again");
     }
   };
 };
@@ -79,10 +79,10 @@ export const deleteMovie = (id) => {
 export const postMovie = (values) => {
   return async (dispatch) => {
     try {
-      await server.post(`add/movie`, values);
-      dispatch(addMovie(values));
+      const response = await server.post(`add/movie`, values);
+      dispatch(addMovie(response.data));
     } catch (e) {
-      throw "Error saving movie. Please try again";
+      throw new Error("Error saving movie. Please try again");
     }
   };
 };
@@ -90,10 +90,14 @@ export const postMovie = (values) => {
 export const patchMovie = (values) => {
   return async (dispatch) => {
     try {
-      await server.post(`/movie/${values._id}?_method=PATCH`, values);
-      dispatch(editMovie(values));
+      console.log(values)
+      const response = await server.post(
+        `/movie/${values._id}?_method=PATCH`,
+        values
+      );
+      dispatch(editMovie(response.data));
     } catch (e) {
-      throw "Error editing movie. Please try again";
+      throw new Error("Error editing movie. Please try again");
     }
   };
 };
