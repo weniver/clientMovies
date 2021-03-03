@@ -108,7 +108,6 @@ const MovieListItem = ({ movie }) => {
     try {
       await dispatch(deleteMovie(id));
     } catch (e) {
-      console.log(e)
       setModalOpen(false);
     }
   };

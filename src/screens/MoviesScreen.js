@@ -8,8 +8,8 @@ const MoviesScreen = () => {
   const dispatch = useDispatch();
   //FETCH DATA REDUX ACTIONS
   useEffect(() => {
-    if (movies.length === 0) dispatch(fetchAllMovies());
-  }, [dispatch, movies.length]);
+    dispatch(fetchAllMovies());
+  }, [dispatch]);
 
   const renderMovies = (data) => {
     return data.map((movie) => {
