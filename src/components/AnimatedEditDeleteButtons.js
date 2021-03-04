@@ -6,8 +6,10 @@ import {
   useTransition,
   config,
 } from "react-spring";
+import styles from "./AnimatedEditDeleteButtons.module.scss";
 
-const AnimateArray = () => {
+
+const AnimatedEditDeleteButtons = () => {
   // const [items, setItems] = useState([1, 2, 3]);
   // const listTransitions = useTransition(items, (item) => item, {
   //   config: { duration: 800 },
@@ -98,6 +100,7 @@ const AnimateArray = () => {
   //     </div>
   //   </div>
   // );
+  return(<div className={`${styles["container"]}}></div>)
 };
 
-export default AnimateArray;
+export default AnimatedEditDeleteButtons;
