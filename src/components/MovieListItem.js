@@ -198,7 +198,7 @@ const MovieListItem = ({ movie }) => {
           <SimpleCard>
             <div className="col-12">
               <h2 style={{ color: "black", marginBottom: "1rem" }}>
-                ¿Are you sure you want to delete the movie?
+                Are you sure you want to delete the movie?
               </h2>
             </div>
             <div className="row justify-content-end">
