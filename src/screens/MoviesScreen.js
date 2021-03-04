@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import MovieListItem from "../components/MovieListItem.js";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllMovies } from "../redux/moviesSlice.js";
+import AnimateArray from "../components/Animations.js";
 
 const MoviesScreen = () => {
   const movies = useSelector((state) => state.movies.data);
@@ -34,6 +35,7 @@ const MoviesScreen = () => {
 
   return (
     <div>
+      <AnimateArray />
       <div className="container-lg p-0">{renderMovies(movies)}</div>
     </div>
   );
