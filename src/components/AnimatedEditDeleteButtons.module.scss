@@ -1,21 +1,19 @@
-.button-wrapper {
-  width: 1em;
-  height: 1em;
-  font-size: 1em;
-  background-color: transparent;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
-  display: flex;
-  margin:0 0.2rem;
+.container {
+  background-color: lighten(#0f0f0f, 70%);
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.4s cubic-bezier(0.33, 1, 0.68, 1);
-  &:hover {
-    background-color: rgba(50, 50, 50, 0.1);
-  }
+  display: flex;
+  flex-direction: row;
+  padding: 0.2rem 1rem;
+  font-size: 1rem;
 }
-
-.icon {
-  font-size: 0.6em;
+.text {
+  color: white;
+  margin: 0;
+}
+.wrapper {
+  display: flex;
 }

@@ -7,7 +7,7 @@ import {
   config,
 } from "react-spring";
 import styles from "./AnimatedEditDeleteButtons.module.scss";
-
+import FontAwesomeButton from "./FontAwesomeButton.js";
 
 const AnimatedEditDeleteButtons = () => {
   // const [items, setItems] = useState([1, 2, 3]);
@@ -100,7 +100,42 @@ const AnimatedEditDeleteButtons = () => {
   //     </div>
   //   </div>
   // );
-  return(<div className={`${styles["container"]}}></div>)
+
+  const [deleting, setDeleting] = useState(false);
+
+  const color = useSpring({
+    config: { duration: 200 },
+    color: deleting ? "tomato" : "white",
+  });
+
+  return (
+    <div className={`${styles["wrapper"]}`}>
+      <div className={`${styles["container"]}`}>
+        {deleting ? (
+          <>
+            <p className={`${styles["text"]}`}>Are you sure?</p>
+            <FontAwesomeButton
+              style={{ color: "white" }}
+              fontAwesomeClasses="fas fa-undo"
+            />
+          </>
+        ) : (
+          <FontAwesomeButton
+            style={{ color: "white" }}
+            fontAwesomeClasses="fas fa-pencil-alt"
+          />
+        )}
+        <animated.div style={color}>
+          <FontAwesomeButton
+            fontAwesomeClasses="fas fa-trash-alt"
+            onClickHandler={() => {
+              setDeleting((prev) => !prev);
+            }}
+          />
+        </animated.div>
+      </div>
+    </div>
+  );
 };
 
 export default AnimatedEditDeleteButtons;
