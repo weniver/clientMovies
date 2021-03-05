@@ -77,7 +77,7 @@ const MovieListItem = ({ movie }) => {
     }
   };
 
-  const fontColorForBackgroundColor = (backgroundColorRGB) => {
+  const fontColorForBackgroundColor = async (backgroundColorRGB) => {
     let lumPrimaryColors = {};
     for (var primaryColor in backgroundColorRGB) {
       let pColorValue = backgroundColorRGB[primaryColor];
@@ -147,8 +147,8 @@ const MovieListItem = ({ movie }) => {
               try {
                 let colorRGB = await getImgMainColorRGBUsingRef(imgRef);
                 setBackgroundColorRGB(colorRGB);
-                let fontColor = fontColorForBackgroundColor(colorRGB);
-                setFontColor(fontColor);
+                let color = await fontColorForBackgroundColor(colorRGB);
+                setFontColor(color);
               } catch (e) {
                 console.log(e);
                 setModalOpen(false);
@@ -175,45 +175,8 @@ const MovieListItem = ({ movie }) => {
           </div>
         </div>
 
-        <AnimatedEditDeleteButtons />
+        <AnimatedEditDeleteButtons fontColor={fontColor} />
       </div>
-      {modalOpen && (
-        <ModalFullScreen
-          clickOutsideHandler={() => {
-            setModalOpen(false);
-          }}
-        >
-          <SimpleCard>
-            <div className="col-12">
-              <h2 style={{ color: "black", marginBottom: "1rem" }}>
-                ¿Are you sure you want to delete the movie?
-              </h2>
-            </div>
-            <div className="row justify-content-end">
-              <div className="col-7 col-md-3">
-                <div className="row justify-content-around">
-                  <FontAwesomeButton
-                    fontSize="4rem"
-                    onClickHandler={() => {
-                      setModalOpen(false);
-                    }}
-                    style={{ color: "#0F0F0F" }}
-                    fontAwesomeClasses="fas fa-undo"
-                  />
-                  <FontAwesomeButton
-                    fontSize="4rem"
-                    onClickHandler={() => {
-                      handleDelete(movie._id);
-                    }}
-                    style={{ color: "tomato" }}
-                    fontAwesomeClasses="fas fa-trash-alt"
-                  />
-                </div>
-              </div>
-            </div>
-          </SimpleCard>
-        </ModalFullScreen>
-      )}
     </div>
   );
 };

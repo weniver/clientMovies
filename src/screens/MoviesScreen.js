@@ -36,7 +36,6 @@ const MoviesScreen = () => {
   return (
     <div>
       <div className="container-lg p-0">
-        <AnimatedEditDeleteButtons />
         {renderMovies(movies)}
       </div>
     </div>

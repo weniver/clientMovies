@@ -8,9 +8,10 @@ const Button = styled.button`
   text-transform: lowercase;
   font-variant: small-caps;
   font-weight: 500;
-  background-color: ${(props) => (props.primary ? "#fbc02d" : "#fff")};
-  color: ${(props) => (props.primary ? "#fff" : "#fbc02d")};
-  border: 3px solid #fbc02d;
+  background-color: ${(props) =>
+    props.primary ? props.theme.colors.main : "#fff"};
+  color: ${(props) => (props.primary ? "#fff" : props.theme.colors.main)};
+  border: 3px solid ${(props) => props.theme.colors.main};
   padding: 0.25rem 1rem;
   transition: 0.2s all ease-out;
   width: 100%;
@@ -21,14 +22,16 @@ const Button = styled.button`
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      color: ${(props) => (props.primary ? "#fbc02d" : "#fff")};
-      background-color: ${(props) => (props.primary ? "#fff" : "#fbc02d")};
+      color: ${(props) => (props.primary ? props.theme.colors.main : "#fff")};
+      background-color: ${(props) =>
+        props.primary ? "#fff" : props.theme.colors.main};
     }
   }
 
   &.touching {
-    color: ${(props) => (props.primary ? "#fbc02d" : "#fff")};
-    background-color: ${(props) => (props.primary ? "#fff" : "#fbc02d")};
+    color: ${(props) => (props.primary ? props.theme.colors.main : "#fff")};
+    background-color: ${(props) =>
+      props.primary ? "#fff" : props.theme.colors.main};
   }
 `;
 
