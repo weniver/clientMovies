@@ -1,41 +1,33 @@
 import React, { useState } from "react";
-import {
-  useSpring,
-  animated,
-  interpolate,
-  useTransition,
-  config,
-} from "react-spring";
+import { useSpring, animated } from "react-spring";
 import styles from "./AnimatedEditDeleteButtons.module.scss";
 import FontAwesomeButton from "./FontAwesomeButton.js";
 import { useMeasure } from "react-use";
 import { withTheme } from "styled-components";
 import { convertHexToRGBA } from "../utilities/color.js";
 
-const AnimatedEditDeleteButtons = ({ fontColor, theme }) => {
+const AnimatedEditDeleteButtons = ({
+  fontColor,
+  theme,
+  handleEdit,
+  handleDelete,
+}) => {
   const [ref, { width }] = useMeasure();
   const [deleting, setDeleting] = useState(false);
 
-  const resize = useSpring({
-    config: { duration: 200 },
-    width: deleting ? width : 0,
-  });
-  const fadeOut = useSpring({
-    config: { duration: 200 },
-    opacity: deleting ? 0 : 1,
-  });
-  const fadeIn = useSpring({
-    config: { duration: 200 },
-    opacity: deleting ? 1 : 0,
-  });
-
-  const color = useSpring({
-    config: { duration: 200 },
+  const {
+    fadeOut,
+    fadeIn,
+    resize,
+    color,
+    backgroundColor,
+    ...rest
+  } = useSpring({
+    config: { duration: 300 },
+    resize: deleting ? width : 0,
+    fadeOut: deleting ? 0 : 1,
+    fadeIn: deleting ? 1 : 0,
     color: deleting ? theme.colors.warning : fontColor,
-  });
-
-  const background = useSpring({
-    config: { duration: 200 },
     backgroundColor: deleting
       ? fontColor == "#0F0F0F"
         ? convertHexToRGBA(theme.colors.black, 0.05)
@@ -45,10 +37,14 @@ const AnimatedEditDeleteButtons = ({ fontColor, theme }) => {
 
   return (
     <div className={`${styles["wrapper"]}`}>
-      <animated.div style={background} className={`${styles["container"]}`}>
+      <animated.div
+        style={{ ...rest, backgroundColor }}
+        className={`${styles["container"]}`}
+      >
         <animated.div
           style={{
-            ...resize,
+            ...rest,
+            width: resize,
             whiteSpace: "nowrap",
             overflow: "hidden",
           }}
@@ -65,7 +61,7 @@ const AnimatedEditDeleteButtons = ({ fontColor, theme }) => {
           </div>
         </animated.div>
         {deleting ? (
-          <animated.div style={fadeIn}>
+          <animated.div style={{ ...rest, opacity: fadeIn }}>
             <FontAwesomeButton
               fontAwesomeClasses="fas fa-undo"
               onClickHandler={() => {
@@ -74,14 +70,20 @@ const AnimatedEditDeleteButtons = ({ fontColor, theme }) => {
             />
           </animated.div>
         ) : (
-          <animated.div style={fadeOut}>
-            <FontAwesomeButton fontAwesomeClasses="fas fa-pencil-alt" />
+          <animated.div style={{ ...rest, opacity: fadeOut }}>
+            <FontAwesomeButton
+              fontAwesomeClasses="fas fa-pencil-alt"
+              onClickHandler={() => {
+                handleEdit();
+              }}
+            />
           </animated.div>
         )}
-        <animated.div style={color}>
+        <animated.div style={{ ...rest, color }}>
           <FontAwesomeButton
             fontAwesomeClasses="fas fa-trash-alt"
             onClickHandler={() => {
+              if (deleting) handleDelete();
               setDeleting((prev) => !prev);
             }}
           />

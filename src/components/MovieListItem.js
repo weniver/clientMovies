@@ -110,7 +110,7 @@ const MovieListItem = ({ movie }) => {
     try {
       await dispatch(deleteMovie(id));
     } catch (e) {
-      setModalOpen(false);
+      console.log(e);
     }
   };
 
@@ -174,8 +174,19 @@ const MovieListItem = ({ movie }) => {
             <h2 className="watched-on">{formatDate(movie.watchedOn)}</h2>
           </div>
         </div>
-
-        <AnimatedEditDeleteButtons fontColor={fontColor} />
+        {showButtons && (
+          <div className="buttons-container">
+            <AnimatedEditDeleteButtons
+              handleEdit={() => {
+                handleEdit(movie);
+              }}
+              handleDelete={() => {
+                handleDelete(movie._id);
+              }}
+              fontColor={fontColor}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
