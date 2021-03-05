@@ -1,18 +1,17 @@
 import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import FontAwesomeButton from "./FontAwesomeButton.js";
-import DateFnsAdapter from "@date-io/date-fns";
-
-import ModalFullScreen from "../components/ModalFullScreen.js";
-import SimpleCard from "./SimpleCard.js";
-
 import "./MovieListItem.scss";
 
 import { deleteMovie } from "../redux/moviesSlice.js";
 import { useDispatch } from "react-redux";
 
+import DateFnsAdapter from "@date-io/date-fns";
+
+import SimpleCard from "./SimpleCard.js";
 import AnimatedEditDeleteButtons from "./AnimatedEditDeleteButtons.js";
+import FontAwesomeButton from "./FontAwesomeButton.js";
+import { withTheme } from "styled-components";
 
 import {
   getConstrastingColorFromRGB,
@@ -21,20 +20,17 @@ import {
   createGradientFromRGB,
 } from "../utilities/color.js";
 
-const MovieListItem = ({ movie }) => {
+const MovieListItem = ({ movie, theme }) => {
   //Redux
   const dispatch = useDispatch();
   //States
   const [backgroundColorRGB, setBackgroundColorRGB] = useState(
-    "rgb(251,192,45)"
+    convertHexToRGB(theme.colors.main)
   );
-
   const [contrastingColor, setContrastingColor] = useState("#ffffff");
   const [showButtons, setShowButtons] = useState(false);
-
   //Navigation
   let history = useHistory();
-
   //Dates
   let dateFns = new DateFnsAdapter();
 
@@ -42,13 +38,7 @@ const MovieListItem = ({ movie }) => {
     return dateFns.format(dateFns.date(date), "d•M•yyyy");
   };
 
-  // const createDateArray = (date) => {
-  //   let dateFns = dateFns.date(date);
-  //   return [dateFns.getDay, dateFns.getMonth, dateFns.getYear];
-  // };
-
   //Info Format
-
   const handleEdit = (movieData) => {
     history.push(`/edit/movie/${movieData._id}`, movieData);
   };
@@ -64,10 +54,8 @@ const MovieListItem = ({ movie }) => {
   const formatMovieInfo = (...data) => {
     return joinArrayWithComa(removeEmptyStrings(data));
   };
-
   //Main Color Poster
   const imgRef = useRef(null);
-
   //Render Helpers
   const renderRating = (n) => {
     let items = [];
@@ -84,7 +72,7 @@ const MovieListItem = ({ movie }) => {
       console.log(e);
     }
   };
-  
+
   return (
     <div
       onMouseEnter={() => setShowButtons(true)}
@@ -153,4 +141,4 @@ const MovieListItem = ({ movie }) => {
   );
 };
 
-export default MovieListItem;
+export default withTheme(MovieListItem);
