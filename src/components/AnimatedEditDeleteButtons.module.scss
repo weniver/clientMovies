@@ -1,19 +1,24 @@
 .container {
-  background-color: lighten(#0f0f0f, 70%);
   -webkit-border-radius: 100px;
   -moz-border-radius: 100px;
   border-radius: 100px;
   align-items: center;
   justify-content: center;
-  display: flex;
   flex-direction: row;
-  padding: 0.2rem 1rem;
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 0.2rem 0.2rem;
   font-size: 1rem;
 }
 .text {
-  color: white;
-  margin: 0;
+  margin: 0 0.5rem 0 1rem;
 }
+
+.text-wrapper {
+  width: fit-content;
+}
+
 .wrapper {
   display: flex;
+  justify-content: flex-end;
 }

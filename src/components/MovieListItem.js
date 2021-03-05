@@ -13,6 +13,8 @@ import "./MovieListItem.scss";
 import { deleteMovie } from "../redux/moviesSlice.js";
 import { useDispatch } from "react-redux";
 
+import AnimatedEditDeleteButtons from "./AnimatedEditDeleteButtons.js";
+
 const MovieListItem = ({ movie }) => {
   //Redux
   const dispatch = useDispatch();
@@ -160,22 +162,6 @@ const MovieListItem = ({ movie }) => {
         )}
       </div>
       <div className="col-9 col-lg-10 p-0">
-        {showButtons && (
-          <div className="buttons-container">
-            <FontAwesomeButton
-              onClickHandler={() => {
-                handleEdit(movie);
-              }}
-              fontAwesomeClasses="fas fa-pencil-alt"
-            />
-            <FontAwesomeButton
-              onClickHandler={() => {
-                setModalOpen(true);
-              }}
-              fontAwesomeClasses="fas fa-trash-alt"
-            />
-          </div>
-        )}
         <div className="row card-info align-items-center justify-content-between">
           <div className="col-12 col-md-8 col-lg-9">
             {renderRating(movie.rating)}
@@ -188,6 +174,8 @@ const MovieListItem = ({ movie }) => {
             <h2 className="watched-on">{formatDate(movie.watchedOn)}</h2>
           </div>
         </div>
+
+        <AnimatedEditDeleteButtons />
       </div>
       {modalOpen && (
         <ModalFullScreen
