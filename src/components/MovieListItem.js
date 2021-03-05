@@ -25,9 +25,8 @@ const MovieListItem = ({ movie }) => {
     blue: 45,
   });
 
-  const [fontColor, setFontColor] = useState("#ffffff");
+  const [contrastingColor, setContrastingColor] = useState("#ffffff");
   const [showButtons, setShowButtons] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
 
   //Navigation
   let history = useHistory();
@@ -77,7 +76,7 @@ const MovieListItem = ({ movie }) => {
     }
   };
 
-  const fontColorForBackgroundColor = async (backgroundColorRGB) => {
+  const getConstrastingColor = async (backgroundColorRGB) => {
     let lumPrimaryColors = {};
     for (var primaryColor in backgroundColorRGB) {
       let pColorValue = backgroundColorRGB[primaryColor];
@@ -120,7 +119,7 @@ const MovieListItem = ({ movie }) => {
       onMouseLeave={() => setShowButtons(false)}
       style={{
         backgroundColor: `rgb(${backgroundColorRGB.red},${backgroundColorRGB.green},${backgroundColorRGB.blue})`,
-        color: fontColor,
+        color: contrastingColor,
         backgroundImage: `linear-gradient(to right,
           rgb(${backgroundColorRGB.red},${backgroundColorRGB.green},${
           backgroundColorRGB.blue
@@ -147,11 +146,10 @@ const MovieListItem = ({ movie }) => {
               try {
                 let colorRGB = await getImgMainColorRGBUsingRef(imgRef);
                 setBackgroundColorRGB(colorRGB);
-                let color = await fontColorForBackgroundColor(colorRGB);
-                setFontColor(color);
+                let color = await getConstrastingColor(colorRGB);
+                setContrastingColor(color);
               } catch (e) {
                 console.log(e);
-                setModalOpen(false);
               }
             }}
             className="poster-movies"
@@ -183,7 +181,7 @@ const MovieListItem = ({ movie }) => {
               handleDelete={() => {
                 handleDelete(movie._id);
               }}
-              contrastingColors={fontColor}
+              contrastingColor={contrastingColor}
             />
           </div>
         )}

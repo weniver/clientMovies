@@ -7,7 +7,7 @@ import { withTheme } from "styled-components";
 import { convertHexToRGBA } from "../utilities/color.js";
 
 const AnimatedEditDeleteButtons = ({
-  contrastingColors,
+  contrastingColor,
   theme,
   handleEdit,
   handleDelete,
@@ -27,9 +27,9 @@ const AnimatedEditDeleteButtons = ({
     resize: deleting ? width : 0,
     fadeOut: deleting ? 0 : 1,
     fadeIn: deleting ? 1 : 0,
-    color: deleting ? theme.colors.warning : contrastingColors,
+    color: deleting ? theme.colors.warning : contrastingColor,
     backgroundColor: deleting
-      ? contrastingColors == "#0F0F0F"
+      ? contrastingColor == "#0F0F0F"
         ? convertHexToRGBA(theme.colors.black, 0.05)
         : convertHexToRGBA(theme.colors.white, 0.05)
       : convertHexToRGBA(theme.colors.white, 0),
@@ -52,7 +52,7 @@ const AnimatedEditDeleteButtons = ({
           <div ref={ref} className={`${styles["text-wrapper"]}`}>
             <p
               style={{
-                color: contrastingColors,
+                color: contrastingColor,
               }}
               className={`${styles["text"]}`}
             >
