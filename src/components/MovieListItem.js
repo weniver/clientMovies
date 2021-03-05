@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import ColorThief from "colorthief";
 import FontAwesomeButton from "./FontAwesomeButton.js";
 import DateFnsAdapter from "@date-io/date-fns";
 
@@ -19,17 +18,16 @@ import {
   getConstrastingColorFromRGB,
   convertHexToRGB,
   getImgMainColorRGBUsingRefAsync,
+  createGradientFromRGB,
 } from "../utilities/color.js";
 
 const MovieListItem = ({ movie }) => {
   //Redux
   const dispatch = useDispatch();
   //States
-  const [backgroundColorRGB, setBackgroundColorRGB] = useState({
-    red: 251,
-    green: 192,
-    blue: 45,
-  });
+  const [backgroundColorRGB, setBackgroundColorRGB] = useState(
+    "rgb(251,192,45)"
+  );
 
   const [contrastingColor, setContrastingColor] = useState("#ffffff");
   const [showButtons, setShowButtons] = useState(false);
@@ -70,38 +68,6 @@ const MovieListItem = ({ movie }) => {
   //Main Color Poster
   const imgRef = useRef(null);
 
-  const getImgMainColorRGBUsingRef = async (ref) => {
-    try {
-      let colorThief = new ColorThief();
-      let img = ref.current;
-      let color = await colorThief.getColor(img, 50);
-      return { red: color[0], green: color[1], blue: color[2] };
-    } catch (e) {
-      console.log(e);
-      //return default color if error
-    }
-  };
-
-  const getConstrastingColor = async (backgroundColorRGB) => {
-    let lumPrimaryColors = {};
-    for (var primaryColor in backgroundColorRGB) {
-      let pColorValue = backgroundColorRGB[primaryColor];
-      pColorValue = pColorValue / 255;
-      if (pColorValue <= 0.03928) {
-        pColorValue = pColorValue / 12.92;
-      } else {
-        pColorValue = Math.pow((pColorValue + 0.055) / 1.055, 2.4);
-        lumPrimaryColors[primaryColor] = pColorValue;
-      }
-    }
-    var colorLum =
-      0.2126 * lumPrimaryColors.red +
-      0.7152 * lumPrimaryColors.green +
-      0.0722 * lumPrimaryColors.blue;
-
-    return colorLum > 0.179 ? "#0F0F0F" : "#ffffff";
-  };
-
   //Render Helpers
   const renderRating = (n) => {
     let items = [];
@@ -118,24 +84,15 @@ const MovieListItem = ({ movie }) => {
       console.log(e);
     }
   };
-
+  
   return (
     <div
       onMouseEnter={() => setShowButtons(true)}
       onMouseLeave={() => setShowButtons(false)}
       style={{
-        backgroundColor: `rgb(${backgroundColorRGB.red},${backgroundColorRGB.green},${backgroundColorRGB.blue})`,
+        backgroundColor: backgroundColorRGB,
         color: contrastingColor,
-        backgroundImage: `linear-gradient(to right,
-          rgb(${backgroundColorRGB.red},${backgroundColorRGB.green},${
-          backgroundColorRGB.blue
-        }),
-          rgb(${backgroundColorRGB.red + 5},${backgroundColorRGB.green + 5},${
-          backgroundColorRGB.blue + 5
-        }),
-          rgb(${backgroundColorRGB.red + 10},${backgroundColorRGB.green + 10},${
-          backgroundColorRGB.blue + 10
-        }))`,
+        backgroundImage: createGradientFromRGB(backgroundColorRGB),
       }}
       className="movie-container row"
     >
@@ -150,9 +107,9 @@ const MovieListItem = ({ movie }) => {
             ref={imgRef}
             onLoad={async () => {
               try {
-                let colorRGB = await getImgMainColorRGBUsingRef(imgRef);
+                let colorRGB = await getImgMainColorRGBUsingRefAsync(imgRef);
                 setBackgroundColorRGB(colorRGB);
-                let color = await getConstrastingColor(colorRGB);
+                let color = getConstrastingColorFromRGB(colorRGB);
                 setContrastingColor(color);
               } catch (e) {
                 console.log(e);

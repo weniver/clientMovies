@@ -29,7 +29,7 @@ export const convertHexToRGB = (hexCode) => {
 };
 
 export const createRedGreenBlueArray = (rgbColor) => {
-  return rgbColor.match(/\d{1,3}/g);
+  return rgbColor.match(/\d{1,3}/g).map((color) => Number(color));
 };
 
 export const createRedGreenBlueObject = (rgbColor) => {
@@ -37,7 +37,7 @@ export const createRedGreenBlueObject = (rgbColor) => {
   return { red: colorArray[0], green: colorArray[1], blue: colorArray[2] };
 };
 
-export const getConstrastingColorFromRGB = async (rgbColor) => {
+export const getConstrastingColorFromRGB = (rgbColor) => {
   let lumPrimaryColors = {};
   let primaryColorsObject = createRedGreenBlueObject(rgbColor);
   for (var primaryColor in primaryColorsObject) {
@@ -59,7 +59,7 @@ export const getConstrastingColorFromRGB = async (rgbColor) => {
   return colorLum > 0.179 ? "#0F0F0F" : "#ffffff";
 };
 
-const getImgMainColorRGBUsingRefAsync = async (ref) => {
+export const getImgMainColorRGBUsingRefAsync = async (ref) => {
   try {
     let colorThief = new ColorThief();
     let img = ref.current;
@@ -68,4 +68,18 @@ const getImgMainColorRGBUsingRefAsync = async (ref) => {
   } catch (e) {
     console.log(e);
   }
+};
+
+export const createGradientFromRGB = (rgb, direction = "to right") => {
+  let primaryColorsObject = createRedGreenBlueObject(rgb);
+  return `linear-gradient(${direction},
+    rgb(${primaryColorsObject.red},${primaryColorsObject.green},${
+    primaryColorsObject.blue
+  }),
+    rgb(${primaryColorsObject.red + 5},${primaryColorsObject.green + 5},${
+    primaryColorsObject.blue + 5
+  }),
+    rgb(${primaryColorsObject.red + 10},${primaryColorsObject.green + 10},${
+    primaryColorsObject.blue + 10
+  }))`;
 };

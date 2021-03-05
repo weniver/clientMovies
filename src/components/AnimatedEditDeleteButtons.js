@@ -30,7 +30,7 @@ const AnimatedEditDeleteButtons = ({
     color: deleting ? theme.colors.warning : contrastingColor,
     backgroundColor: deleting
       ? contrastingColor == "#0F0F0F"
-        ? convertHexToRGBA(theme.colors.black, 0.05)
+        ? convertHexToRGBA(theme.colors.black, 0.25)
         : convertHexToRGBA(theme.colors.white, 0.05)
       : convertHexToRGBA(theme.colors.white, 0),
   });
