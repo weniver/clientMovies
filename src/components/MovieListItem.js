@@ -183,7 +183,7 @@ const MovieListItem = ({ movie }) => {
               handleDelete={() => {
                 handleDelete(movie._id);
               }}
-              fontColor={fontColor}
+              contrastingColors={fontColor}
             />
           </div>
         )}
