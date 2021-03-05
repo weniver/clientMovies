@@ -1,8 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import "./MovieListItem.scss";
-
 import { deleteMovie } from "../redux/moviesSlice.js";
 import { useDispatch } from "react-redux";
 
@@ -12,6 +10,8 @@ import SimpleCard from "./SimpleCard.js";
 import AnimatedEditDeleteButtons from "./AnimatedEditDeleteButtons.js";
 import FontAwesomeButton from "./FontAwesomeButton.js";
 import { withTheme } from "styled-components";
+
+import styles from "./MovieListItem.module.scss";
 
 import {
   getConstrastingColorFromRGB,
@@ -60,7 +60,9 @@ const MovieListItem = ({ movie, theme }) => {
   const renderRating = (n) => {
     let items = [];
     for (let i = 0; i < n; i++) {
-      items.push(<i key={i} className="fas fa-lemon rating-lemons"></i>);
+      items.push(
+        <i key={i} className={`fas fa-lemon ${styles["rating-lemons"]}`}></i>
+      );
     }
     return items;
   };
@@ -82,7 +84,7 @@ const MovieListItem = ({ movie, theme }) => {
         color: contrastingColor,
         backgroundImage: createGradientFromRGB(backgroundColorRGB),
       }}
-      className="movie-container row"
+      className={`${styles["movie-container"]} row`}
     >
       <div
         style={{ overflow: "hidden" }}
@@ -103,7 +105,7 @@ const MovieListItem = ({ movie, theme }) => {
                 console.log(e);
               }
             }}
-            className="poster-movies"
+            className={styles["poster-movies"]}
             alt={movie.title}
           />
         ) : (
@@ -111,11 +113,15 @@ const MovieListItem = ({ movie, theme }) => {
         )}
       </div>
       <div className="col-9 col-lg-10 p-0">
-        <div className="row card-info align-items-center justify-content-between">
+        <div
+          className={`row ${styles["card-info"]} align-items-center justify-content-between`}
+        >
           <div className="col-12 col-md-8 col-lg-9">
             {renderRating(movie.rating)}
-            <h2 className="no-wrap-ellipsis title">{movie.title}</h2>
-            <h4 className="no-wrap-ellipsis">
+            <h2 className={`${styles["no-wrap-ellipsis"]} ${styles.title}`}>
+              {movie.title}
+            </h2>
+            <h4 className={styles["no-wrap-ellipsis"]}>
               {formatMovieInfo(movie.director, movie.country, movie.year)}
             </h4>
           </div>
@@ -124,7 +130,7 @@ const MovieListItem = ({ movie, theme }) => {
           </div>
         </div>
         {showButtons && (
-          <div className="buttons-container">
+          <div className={styles["buttons-container"]}>
             <AnimatedEditDeleteButtons
               handleEdit={() => {
                 handleEdit(movie);
