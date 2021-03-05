@@ -15,6 +15,8 @@ import { useDispatch } from "react-redux";
 
 import AnimatedEditDeleteButtons from "./AnimatedEditDeleteButtons.js";
 
+import { getConstrastingColorFromRGB } from "../utilities/color.js";
+
 const MovieListItem = ({ movie }) => {
   //Redux
   const dispatch = useDispatch();

@@ -11,3 +11,34 @@ export const convertHexToRGBA = (hexCode, opacity) => {
 
   return `rgba(${r},${g},${b},${opacity})`;
 };
+
+export const createRedGreenBlueArray = (rgbColor) => {
+  return rgbColor.match(/\d{1,3}/g);
+};
+
+export const createRedGreenBlueObject = (rgbColor) => {
+  let colorArray = createRedGreenBlueArray(rgbColor);
+  return { red: colorArray[0], green: colorArray[1], blue: colorArray[2] };
+};
+
+export const getConstrastingColorFromRGB = async (rgbColor) => {
+  let lumPrimaryColors = {};
+  let primaryColorsObject = createRedGreenBlueObject(rgbColor);
+  for (var primaryColor in primaryColorsObject) {
+    let pColorValue = primaryColorsObject[primaryColor];
+    pColorValue = pColorValue / 255;
+    if (pColorValue <= 0.03928) {
+      pColorValue = pColorValue / 12.92;
+    } else {
+      pColorValue = Math.pow((pColorValue + 0.055) / 1.055, 2.4);
+      lumPrimaryColors[primaryColor] = pColorValue;
+    }
+  }
+
+  var colorLum =
+    0.2126 * lumPrimaryColors.red +
+    0.7152 * lumPrimaryColors.green +
+    0.0722 * lumPrimaryColors.blue;
+
+  return colorLum > 0.179 ? "#0F0F0F" : "#ffffff";
+};
