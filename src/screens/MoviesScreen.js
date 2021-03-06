@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import MovieListItem from "../components/MovieListItem.js";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllMovies } from "../redux/moviesSlice.js";
-import AnimatedEditDeleteButtons from "../components/AnimatedEditDeleteButtons.js";
 
 const MoviesScreen = () => {
   const movies = useSelector((state) => state.movies.data);

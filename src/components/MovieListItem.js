@@ -6,9 +6,7 @@ import { useDispatch } from "react-redux";
 
 import DateFnsAdapter from "@date-io/date-fns";
 
-import SimpleCard from "./SimpleCard.js";
 import AnimatedEditDeleteButtons from "./AnimatedEditDeleteButtons.js";
-import FontAwesomeButton from "./FontAwesomeButton.js";
 import { withTheme } from "styled-components";
 
 import styles from "./MovieListItem.module.scss";
