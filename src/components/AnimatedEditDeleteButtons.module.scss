@@ -1,0 +1,22 @@
+.container {
+  border-radius: 100px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 0rem 0.2rem;
+  font-size: 1rem;
+}
+.text {
+  margin: 0 0.5rem 0 1rem;
+}
+
+.text-wrapper {
+  width: fit-content;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: flex-end;
+}

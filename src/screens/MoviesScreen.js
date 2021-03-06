@@ -34,9 +34,10 @@ const MoviesScreen = () => {
 
   return (
     <div>
-      <div className="container-lg p-0">{renderMovies(movies)}</div>
+      <div className="container-lg p-0">
+        {renderMovies(movies)}
+      </div>
     </div>
   );
 };
-
 export default MoviesScreen;
