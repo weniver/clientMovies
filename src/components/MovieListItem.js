@@ -72,73 +72,6 @@ const MovieListItem = ({ movie, theme }) => {
       console.log(e);
     }
   };
-  // <div
-  // onMouseEnter={() => setShowButtons(true)}
-  // onMouseLeave={() => setShowButtons(false)}
-  // style={{
-  //   backgroundColor: backgroundColorRGB,
-  //   color: contrastingColor,
-  //   backgroundImage: createGradientFromRGB(backgroundColorRGB),
-  // }}
-  //   className={`${styles["movie-container"]} row justify-content-center align-items-center`}
-  // >
-  //   <div className={`${styles["poster-wrapper"]} col-3 col-lg-2`}>
-  //     <div className="row">
-  // {movie.poster ? (
-  //   <img
-  //     crossOrigin="anonymous"
-  //     src={movie.poster}
-  //     ref={imgRef}
-  //     onLoad={async () => {
-  //       try {
-  //         let colorRGB = await getImgMainColorRGBUsingRefAsync(imgRef);
-  //         setBackgroundColorRGB(colorRGB);
-  //         let color = getConstrastingColorFromRGB(colorRGB);
-  //         setContrastingColor(color);
-  //       } catch (e) {
-  //         console.log(e);
-  //       }
-  //     }}
-  //     className={styles["poster-movies"]}
-  //     alt={movie.title}
-  //   />
-  // ) : (
-  //   <i className="fas fa-lemon fa-3x"></i>
-  // )}
-  //     </div>
-  //   </div>
-  //   <div className="col-9 col-lg-10 p-0">
-  //     <div
-  //       className={`row ${styles["card-info"]} align-items-center justify-content-between`}
-  //     >
-  // <div className="col-12 col-md-8 col-lg-9">
-  //   {renderRating(movie.rating)}
-  //   <h2 className={`${styles["no-wrap-ellipsis"]} ${styles.title}`}>
-  //     {movie.title}
-  //   </h2>
-  //   <h4 className={styles["no-wrap-ellipsis"]}>
-  //     {formatMovieInfo(movie.director, movie.country, movie.year)}
-  //   </h4>
-  // </div>
-  // <div className="col-12 col-md-4 col-lg-3">
-  //   <h2 className="watched-on">{formatDate(movie.watchedOn)}</h2>
-  // </div>
-  //     </div>
-  //     {showButtons && (
-  //       <div className={styles["buttons-container"]}>
-  //         <AnimatedEditDeleteButtons
-  //           handleEdit={() => {
-  //             handleEdit(movie);
-  //           }}
-  //           handleDelete={() => {
-  //             handleDelete(movie._id);
-  //           }}
-  //           contrastingColor={contrastingColor}
-  //         />
-  //       </div>
-  //     )}
-  //   </div>
-  // </div>
 
   return (
     <div
@@ -176,7 +109,7 @@ const MovieListItem = ({ movie, theme }) => {
       </div>
       <div className="col-9 col-lg-10 p-0">
         <div className={`${styles["movie-data"]} row`}>
-          <div className="col-12 col-md-8 col-lg-9">
+          <div className={`${styles["mt-xs-auto"]} col-12 col-sm-8 col-lg-9`}>
             {renderRating(movie.rating)}
             <h2 className={`${styles["no-wrap-ellipsis"]} ${styles.title}`}>
               {movie.title}
@@ -185,11 +118,12 @@ const MovieListItem = ({ movie, theme }) => {
               {formatMovieInfo(movie.director, movie.country, movie.year)}
             </h4>
           </div>
-          <div className="col-12 col-md-4 col-lg-3">
+          <div className={`${styles["mb-xs-auto"]} col-12 col-sm-4 col-lg-3`}>
             <h2>{formatDate(movie.watchedOn)}</h2>
           </div>
         </div>
       </div>
+
       {showButtons && (
         <div className={styles["buttons-container"]}>
           <AnimatedEditDeleteButtons

@@ -1,5 +1,3 @@
-@import "../variables";
-
 .movie-row {
   position: relative;
   min-height: 9rem;
@@ -77,6 +75,18 @@
   .movie-row {
     min-height: 12rem;
   }
+  .mt-xs-auto {
+    margin-top: auto;
+  }
+  .mb-xs-auto {
+    margin-bottom: auto;
+  }
+
+  .vertical-align-small {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
   .movie-poster {
     width: 150%;
     position: absolute;
