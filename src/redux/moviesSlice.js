@@ -5,6 +5,7 @@ export const moviesSlice = createSlice({
   name: "movies",
   initialState: {
     data: [],
+    count: 0,
     status: "idle",
     error: "",
   },
@@ -17,7 +18,8 @@ export const moviesSlice = createSlice({
     moviesReceived: (state, action) => {
       if (state.status === "loading") {
         state.status = "idle";
-        state.data = action.payload;
+        state.data = action.payload.movieData;
+        state.count = action.payload.count;
       }
     },
     moviesError: (state, action) => {
@@ -90,7 +92,7 @@ export const postMovie = (values) => {
 export const patchMovie = (values) => {
   return async (dispatch) => {
     try {
-      console.log(values)
+      console.log(values);
       const response = await server.post(
         `/movie/${values._id}?_method=PATCH`,
         values

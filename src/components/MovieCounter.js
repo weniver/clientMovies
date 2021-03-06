@@ -3,6 +3,8 @@ import { useSpring, animated } from "react-spring";
 import styles from "./AnimatedEditDeleteButtons.module.scss";
 import styled from "styled-components";
 
+import { useSelector } from "react-redux";
+
 const StyledSpan = styled(animated.span)`
   margin: 0 0.3rem;
   font-size: 1.3rem;
@@ -26,9 +28,10 @@ const StyledH4 = styled(animated.span)`
 `;
 
 const MovieCounter = () => {
+  const count = useSelector((state) => state.movies.count);
   const animation = useSpring({
-    config: { duration: 2000 },
-    number: 120,
+    config: { duration: 1500 },
+    number: count,
     from: { number: 0 },
   });
 
@@ -39,7 +42,7 @@ const MovieCounter = () => {
         <StyledSpan>
           {animation.number.interpolate((number) => Math.round(number))}
         </StyledSpan>
-        movies
+        {count === 1 ? "movie" : "movies"}
       </StyledH4>
     </div>
   );
