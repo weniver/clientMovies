@@ -2,8 +2,6 @@
 
 @mixin border-poster($border-width, $radius) {
   border-radius: $radius;
-  -webkit-border-radius: $radius;
-  -moz-border-radius: $radius;
   border: solid $border-width $main-color;
 }
 .poster-img {

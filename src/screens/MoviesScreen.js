@@ -40,5 +40,22 @@ const MoviesScreen = () => {
     </div>
   );
 };
-
+// <div>
+//   <div className="container-lg p-0">
+//     <div
+//       style={{ backgroundColor: "tomato", minHeight: "5rem" }}
+//       className="row"
+//     >
+//       <div
+//         style={{ backgroundColor: "lightgreen" }}
+//         className="col-2"
+//       ></div>
+//       <div style={{ backgroundColor: "lightblue" }} className="col">
+//         <div style={{ backgroundColor: "tomato", height: "100%"}} className="row">
+//
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// </div>
 export default MoviesScreen;
