@@ -7,11 +7,13 @@
 .input {
   border-radius: 0px;
   border: 0;
+  background-color: ghostwhite;
   border-bottom: solid 2px $main-color;
   transition: all 0.1s ease-in-out;
   &:focus {
     box-shadow: none !important;
     outline: none !important;
+    background-color: ghostwhite;
     border-bottom: solid 4px $main-color;
   }
 }

@@ -119,7 +119,7 @@ const MovieListItem = ({ movie, theme }) => {
             </h4>
           </div>
           <div className={`${styles["mb-xs-auto"]} col-12 col-sm-4 col-lg-3`}>
-            <h2>{formatDate(movie.watchedOn)}</h2>
+            <h3>{formatDate(movie.watchedOn)}</h3>
           </div>
         </div>
       </div>
