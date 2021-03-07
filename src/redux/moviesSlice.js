@@ -31,6 +31,7 @@ export const moviesSlice = createSlice({
     removeMovie: (state, action) => {
       let id = action.payload;
       state.data = state.data.filter((movie) => movie._id !== id);
+      state.count = state.count - 1;
     },
     addMovie: (state, action) => {
       let movieData = action.payload;
