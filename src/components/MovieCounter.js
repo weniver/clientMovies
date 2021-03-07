@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 const StyledSpan = styled(animated.span)`
   margin: 0 0.3rem;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: bold;
   color: ${(props) => props.theme.colors.main};
   margin: 0 0.3rem;
@@ -17,7 +17,7 @@ const StyledSpan = styled(animated.span)`
 `;
 const StyledH4 = styled(animated.span)`
   margin-left: 0.4rem;
-  font-size: 1.7rem;
+  font-size: 1.4rem;
   line-height: 1.4rem;
   text-transform: lowercase;
   font-variant: small-caps;

@@ -9,14 +9,14 @@ const Box = styled.div`
   flex-direction: column;
   justify-content: center;
   @media (max-width: 991.98px) {
-    padding: 1rem;
+    padding: 0.5rem;
   }
 `;
 const Title = styled.h1`
   text-transform: uppercase;
   margin: 0;
-  line-height: 3.5rem;
-  font-size: 4rem;
+  line-height: 3.4rem;
+  font-size: 3.8rem;
   @media (min-width: 768px) {
     line-height: 4.5rem;
     font-size: 5rem;

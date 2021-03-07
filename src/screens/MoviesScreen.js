@@ -39,13 +39,10 @@ const MoviesScreen = () => {
     enter: {
       transform: "translate3d(0,0,0)",
       opacity: 1,
-      height: "10rem",
     },
     leave: {
       transform: "translate3d(100vw,0,0)",
       opacity: 0,
-      height: "0rem",
-      overflow: "hidden",
     },
   });
 
