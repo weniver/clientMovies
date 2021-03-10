@@ -12,8 +12,8 @@ const StyledDiv = styled.div`
 `;
 const Spinner = styled.div`
   color: ${(props) => props.theme.colors.main};
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 0.7rem;
+  height: 0.7rem;
   margin: 0 0.2rem;
 `;
 

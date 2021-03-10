@@ -5,6 +5,7 @@ import MovieFormScreen from "./screens/MovieFormScreen.js";
 import Error404Screen from "./screens/Error404Screen.js";
 import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
+import ScrollTop from "./components/ScrollTop.js"
 import { light } from "./theme.js";
 
 import { ThemeProvider } from "styled-components";
@@ -13,6 +14,7 @@ function App() {
   return (
     <ThemeProvider theme={light}>
       <Router>
+      <ScrollTop/>
         <Header />
         <Switch>
           <Route exact path="/">
