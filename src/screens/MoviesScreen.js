@@ -18,16 +18,18 @@ const MoviesScreen = () => {
   }, [dispatch]);
 
   const transitions = useTransition(movies, (movie) => movie._id, {
-    config: 	{ mass: 1, tension: 120, friction: 14 },
-    from: { transform: "translate3d(-100vw,0,0)", opacity: 0 },
+    from: { transform: "translate3d(-100vw,0,0)", opacity: 0, height: 192 },
     trail: 150,
     enter: {
       transform: "translate3d(0,0,0)",
       opacity: 1,
+      height: 192,
     },
     leave: {
       transform: "translate3d(100vw,0,0)",
       opacity: 0,
+      height: 0,
+      overflow: "hidden",
     },
   });
 
