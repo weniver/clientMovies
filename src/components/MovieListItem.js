@@ -104,7 +104,9 @@ const MovieListItem = ({ movie, theme }) => {
             alt={movie.title}
           />
         ) : (
-          <i className="fas fa-lemon fa-3x"></i>
+          <div className="d-flex h-100 justify-content-center align-items-center">
+            <i className="fas fa-lemon fa-2x my-auto"></i>
+          </div>
         )}
       </div>
       <div className="col-9 col-lg-10 p-0">
