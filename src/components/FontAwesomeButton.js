@@ -1,12 +1,23 @@
 import React from "react";
 import styles from "./FontAwesomeButton.module.scss";
 
-const FontAwesomeButton = ({ fontSize, onClickHandler, fontAwesomeClasses,style }) => {
+const FontAwesomeButton = ({
+  fontSize,
+  onClickHandler,
+  fontAwesomeClasses,
+  style,
+}) => {
   return (
     <div style={{ fontSize: `${fontSize || "2rem"}` }}>
       <div
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
           onClickHandler();
+        }}
+        onTouchStart={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
         }}
         style={{ ...style }}
         className={styles["button-wrapper"]}

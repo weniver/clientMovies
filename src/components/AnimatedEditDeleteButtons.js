@@ -36,7 +36,12 @@ const AnimatedEditDeleteButtons = ({
   });
 
   return (
-    <div className={`${styles["wrapper"]}`}>
+    <div
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
+      className={`${styles["wrapper"]}`}
+    >
       <animated.div
         style={{ ...rest, backgroundColor }}
         className={`${styles["container"]}`}

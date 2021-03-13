@@ -77,6 +77,7 @@ const MovieListItem = ({ movie, theme }) => {
     <div
       onMouseEnter={() => setShowButtons(true)}
       onMouseLeave={() => setShowButtons(false)}
+      onTouchStart={() => setShowButtons((p) => !p)}
       style={{
         backgroundColor: backgroundColorRGB,
         color: contrastingColor,
@@ -127,7 +128,19 @@ const MovieListItem = ({ movie, theme }) => {
       </div>
 
       {showButtons && (
-        <div className={styles["buttons-container"]}>
+        <div
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+          onTouchStart={
+            (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }
+          }
+          className={styles["buttons-container"]}
+        >
           <AnimatedEditDeleteButtons
             handleEdit={() => {
               handleEdit(movie);
