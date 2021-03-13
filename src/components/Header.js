@@ -6,8 +6,7 @@ import HeaderLink from "./HeaderLink.js";
 const Container = styled.div`
   height: 6rem;
   @media (max-width: 991.98px) {
-    height: 5rem;
-    padding-left: 1rem;
+    height: 4rem;
   }
 `;
 
@@ -18,7 +17,7 @@ const Header = () => {
       <div className="row align-items-center h-100">
         <div className="col p-0">
           <HeaderLink
-            size="5rem"
+            size="5"
             fontAwesome="fas fa-lemon"
             onClickHandler={() => {
               history.push("/");
@@ -28,7 +27,7 @@ const Header = () => {
 
         <div className="col-auto">
           <HeaderLink
-            size="5rem"
+            size="5"
             fontAwesome="far fa-plus-square"
             onClickHandler={() => {
               history.push("/add/movie");

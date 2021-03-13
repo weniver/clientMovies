@@ -12,20 +12,24 @@ const Icon = styled.i`
     props.interacting ? props.theme.colors.black : props.theme.colors.main};
 `;
 const Size = styled.div`
-  font-size: ${({ size }) => size || "1rem"};
+  font-size: ${({ size }) => size + "rem" || "1rem"};
+  @media (max-width: 991.98px) {
+    font-size: ${({ size }) => size * 0.7 + "rem" || "1rem"};
+  }
 `;
 
 const ButtonContainer = styled.div`
   width: 1em;
   height: 1em;
   font-size: 1em;
-  background-color: ${(props) => (props.interacting ? "rgba(50, 50, 50, 0.05)" : "transparent")};
+  background-color: ${(props) =>
+    props.interacting ? "rgba(50, 50, 50, 0.05)" : "transparent"};
   border-radius: 50%;
   display: flex;
   margin: 0;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+  transition: all 0.4s cubic-bezier(0.33, 1, 0.68, 1);
 `;
 
 const HeaderLink = ({ size, onClickHandler, fontAwesome }) => {

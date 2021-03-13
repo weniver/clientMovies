@@ -8,7 +8,7 @@ const Box = styled.div`
   flex-direction: column;
   justify-content: center;
   @media (max-width: 991.98px) {
-    padding: 0.5rem;
+    padding:0 0 0.5rem 0.5rem;
   }
 `;
 const Title = styled.h1`

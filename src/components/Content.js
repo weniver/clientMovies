@@ -2,9 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const Box = styled.div`
-  height: calc(100vh - 17rem);
+  height: calc(100vh - 18rem);
   display: flex;
-  background-color: tomato;
   flex-direction: ${(props) => props.direction || "column"};
   justify-content: center;
   align-items: center;

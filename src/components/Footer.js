@@ -6,7 +6,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 13rem;
+  height: 11rem;
 `;
 
 const FooterLogoH1 = styled.h1`
