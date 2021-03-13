@@ -12,7 +12,9 @@
   width: 105%;
   height: auto;
   position: absolute;
-  top: -25%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .poster-wrapper {
@@ -52,7 +54,7 @@
   font-size: 1.5rem;
 }
 
-.date{
+.date {
   font-weight: 500;
   letter-spacing: 0.15rem;
   font-size: 1.9rem;
@@ -66,11 +68,8 @@
     border-bottom: 0.3rem solid white;
   }
   .movie-poster {
-    width: 125%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 105%;
+    height: auto;
   }
 }
 
@@ -90,10 +89,7 @@
   }
 
   .movie-poster {
-    width: 170%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: auto;
+    height: 100%;
   }
 }
