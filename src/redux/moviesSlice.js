@@ -7,7 +7,7 @@ export const moviesSlice = createSlice({
     data: [],
     count: 0,
     status: "idle",
-    error: "",
+    error: null,
   },
   reducers: {
     moviesLoading: (state, action) => {
@@ -17,14 +17,14 @@ export const moviesSlice = createSlice({
     },
     moviesReceived: (state, action) => {
       if (state.status === "loading") {
-        state.status = "idle";
+        state.status = "succeeded";
         state.data = action.payload.movieData;
         state.count = action.payload.count;
       }
     },
     moviesError: (state, action) => {
       if (state.status === "loading") {
-        state.status = "idle";
+        state.status = "failed";
         state.error = action.payload;
       }
     },
@@ -63,7 +63,11 @@ export const fetchAllMovies = () => {
       const response = await server.get(`/movies`);
       dispatch(moviesReceived(response.data));
     } catch (e) {
-      dispatch(moviesError(JSON.stringify(e)));
+      dispatch(
+        moviesError(
+          "We are having some problems. Please reload your page or try again later."
+        )
+      );
     }
   };
 };

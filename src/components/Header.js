@@ -1,23 +1,42 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styles from "./Header.module.scss";
+import React, { useContext } from "react";
+import styled from "styled-components";
+import { useHistory } from "react-router-dom";
+import HeaderLink from "./HeaderLink.js";
+
+const Container = styled.div`
+  height: 6rem;
+  @media (max-width: 991.98px) {
+    height: 5rem;
+    padding-left: 1rem;
+  }
+`;
 
 const Header = () => {
+  let history = useHistory();
   return (
-    <div className={`container-lg ${styles.header}`}>
+    <Container className="container-lg">
       <div className="row align-items-center h-100">
-        <div className="col">
-          <Link className={`${styles["header-link"]} ${styles["logo"]}`} to="/">
-            <i className="fas fa-lg fa-lemon"></i>
-          </Link>
+        <div className="col p-0">
+          <HeaderLink
+            size="5rem"
+            fontAwesome="fas fa-lemon"
+            onClickHandler={() => {
+              history.push("/");
+            }}
+          />
         </div>
-        <div className="col text-right">
-          <Link className={`${styles["header-link"]} ${styles["plus"]}`} to="/add/movie">
-            <i className="fas fa-plus-circle"></i>
-          </Link>
+
+        <div className="col-auto">
+          <HeaderLink
+            size="5rem"
+            fontAwesome="far fa-plus-square"
+            onClickHandler={() => {
+              history.push("/add/movie");
+            }}
+          />
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

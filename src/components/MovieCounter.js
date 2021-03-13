@@ -6,24 +6,19 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 
 const StyledSpan = styled(animated.span)`
-  margin: 0 0.3rem;
-  font-size: 1.1rem;
+  margin: 0 0.2rem;
   font-weight: bold;
   color: ${(props) => props.theme.colors.main};
-  margin: 0 0.3rem;
-  @media (min-width: 768px) {
-    font-size: 1.4rem;
-  }
 `;
-const StyledH4 = styled(animated.span)`
-  margin-left: 0.4rem;
-  font-size: 1.4rem;
-  line-height: 1.4rem;
-  text-transform: lowercase;
-  font-variant: small-caps;
-  @media (min-width: 768px) {
-    line-height: 1.6rem;
-    font-size: 2rem;
+const StyledH4 = styled.h4`
+  margin:0 0 0 0.4rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  color: ${(props) => props.theme.colors.black};
+  text-transform: uppercase;
+  @media (max-width: 991.98px) {
+    line-height: 1.5rem;
+    font-size: 1rem;
   }
 `;
 
@@ -36,7 +31,7 @@ const MovieCounter = () => {
   });
 
   return (
-    <div>
+    <>
       <StyledH4>
         You have watched
         <StyledSpan>
@@ -44,7 +39,7 @@ const MovieCounter = () => {
         </StyledSpan>
         {count === 1 ? "movie" : "movies"}
       </StyledH4>
-    </div>
+    </>
   );
 };
 
