@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import Interacting, {
+import {
   InteractingContext,
   withInteraction,
 } from "./Interacting.js";

@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./TitleBanner.module.scss";
 import styled from "styled-components";
 import MovieCounter from "./MovieCounter.js";
 

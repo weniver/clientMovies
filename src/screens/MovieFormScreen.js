@@ -219,7 +219,7 @@ const MovieFormScreen = (props) => {
               </>
             )}
           </div>
-          <div className="col-12 col-md-4 mx-auto">
+          <div className="col-12 col-md-4 mx-auto mt-5 mt-sm-0">
             <StyledButton primary type="submit">
               {onEditPage ? "EDIT MOVIE" : "ADD MOVIE"}
             </StyledButton>

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React  from "react";
 import { useSpring, animated } from "react-spring";
-import styles from "./AnimatedEditDeleteButtons.module.scss";
 import styled from "styled-components";
 
 import { useSelector } from "react-redux";

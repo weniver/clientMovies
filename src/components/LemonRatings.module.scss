@@ -3,7 +3,10 @@
 
 .lemons-wrapper {
   color: $main-color;
-  font-size: 1.8rem;
+  font-size: 1.7rem;
+  @media (max-width: 991.98px) {
+    font-size: 1.5rem;
+  }
 }
 .lemon {
   font-size: 1em;
